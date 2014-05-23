@@ -12,8 +12,8 @@
     function captureSuccess(mediaFiles) {
         var i, len;
         for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-			alert(" upload this file");
-            //uploadFile(mediaFiles[i]);
+			//alert(" upload this file");
+            uploadFile(mediaFiles[i]);
         }       
     }
 
@@ -37,8 +37,8 @@
         var ft = new FileTransfer(),
             path = mediaFile.fullPath,
             name = mediaFile.name;
-
-        ft.upload(path,
+			$("#uploadedImage").attr("src",path);
+        /*ft.upload(path,
             "http://my.domain.com/upload.php",
             function(result) {
                 console.log('Upload success: ' + result.responseCode);
@@ -47,18 +47,22 @@
             function(error) {
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });   
+            { fileName: name });   */
     }
 
     </script>
     </head>
     <body>
         <button onclick="captureImage();">Capture Image</button> <br>	 
-     
+		<div style="width:100px;height:100px;">
+		<img id="uploadedImage" src="#" />
+		
+		</div>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript">
             app.initialize();
-        </script>VIJAY PALIWAL
- SHIVAM ITCS SHIVAM ITCS  </body>
+        </script>
+    </body>
 </html>
