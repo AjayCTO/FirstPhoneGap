@@ -1,68 +1,479 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <script type="text/javascript" charset="utf-8">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link href="css/index.css" rel="stylesheet" id="bootstrap-css">
+<link href="css/fontawesome.css" rel="stylesheet">
+     
+    <style>
+        
 
-    // Called when capture operation is finished
-    //
-    function captureSuccess(mediaFiles) {
-        var i, len;
-        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-			//alert(" upload this file");
-            uploadFile(mediaFiles[i]);
-        }       
-    }
+        body {
+            padding-top: 50px;
+            position: relative;
+            font-family: 'Lato', 'sans-serif';
+        }
 
-    // Called if something bad happens.
-    // 
-    function captureError(error) {
-        var msg = 'An error occurred during capture: ' + error.code;
-        navigator.notification.alert(msg, null, 'Uh oh!');
-    }
+        pre {
+            tab-size: 8;
+        }
 
-    // A button will call this function
-    //
-    function captureImage() {
-        // Launch device camera application, 
-        // allowing user to capture up to 2 images
-        navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 2});
-    }
+        .navbar-inverse {
+            background-color: #163752 !important;
+        }
 
-    // Upload files to server
-    function uploadFile(mediaFile) {
-        var ft = new FileTransfer(),
-            path = mediaFile.fullPath,
-            name = mediaFile.name;
-			$("#uploadedImage").attr("src",path);
-        /*ft.upload(path,
-            "http://my.domain.com/upload.php",
-            function(result) {
-                console.log('Upload success: ' + result.responseCode);
-                console.log(result.bytesSent + ' bytes sent');
-            },
-            function(error) {
-                console.log('Error uploading file ' + path + ': ' + error.code);
-            },
-            { fileName: name });   */
-    }
+        @media screen and (max-width: 768px) {
+            .side-collapse-container {
+                width: 100%;
+                position: relative;
+                left: 0;
+                transition: left .4s;
+            }
+
+                .side-collapse-container.out {
+                    left: 200px;
+                }
+
+            .side-collapse {
+                top: 50px;
+                bottom: 0;
+                left: 0;
+                width: 200px;
+                position: fixed;
+                overflow: hidden;
+                transition: width .4s;
+            }
+
+                .side-collapse.in {
+                    width: 0;
+                }
+        }
+
+        .tile-progress {
+            background-color: #303641;
+            color: #fff;
+        }
+
+        .tile-progress {
+            background: #00a65b;
+            color: #fff;
+            margin-bottom: 20px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+            .tile-progress .tile-header {
+                padding: 15px 20px;
+                padding-bottom: 40px;
+            }
+
+            .tile-progress .tile-progressbar {
+                height: 2px;
+                background: rgba(0,0,0,0.18);
+                margin: 0;
+            }
+
+                .tile-progress .tile-progressbar span {
+                    background: #fff;
+                }
+
+                .tile-progress .tile-progressbar span {
+                    display: block;
+                    background: #fff;
+                    width: 0;
+                    height: 100%;
+                    -webkit-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
+                    -moz-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
+                    -o-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
+                    transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
+                }
+
+            .tile-progress .tile-footer {
+                padding: 20px;
+                text-align: right;
+                background: rgba(0,0,0,0.1);
+                -webkit-border-radius: 0 0 3px 3px;
+                -webkit-background-clip: padding-box;
+                -moz-border-radius: 0 0 3px 3px;
+                -moz-background-clip: padding;
+                border-radius: 0 0 3px 3px;
+                background-clip: padding-box;
+                -webkit-border-radius: 0 0 3px 3px;
+                -moz-border-radius: 0 0 3px 3px;
+                border-radius: 0 0 3px 3px;
+            }
+
+            .tile-progress.tile-red {
+                background-color: #f56954;
+                color: #fff;
+            }
+
+        .tile-progress {
+            background-color: #303641;
+            color: #fff;
+        }
+
+            .tile-progress.tile-blue {
+                background-color: #0073b7;
+                color: #fff;
+            }
+
+            .tile-progress.tile-aqua {
+                background-color: #00c0ef;
+                color: #fff;
+            }
+
+            .tile-progress.tile-green {
+                background-color: #00a65a;
+                color: #fff;
+            }
+
+            .tile-progress.tile-cyan {
+                background-color: #00b29e;
+                color: #fff;
+            }
+
+            .tile-progress.tile-purple {
+                background-color: #ba79cb;
+                color: #fff;
+            }
+
+            .tile-progress.tile-pink {
+                background-color: #ec3b83;
+                color: #fff;
+            }
+
+        .user-details {
+            position: relative;
+            padding: 0;
+        }
+
+            .user-details .user-image {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                text-align: center;
+            }
+
+        .user-image img {
+            clear: both;
+            margin: auto;
+            position: relative;
+        }
+
+        .user-details .user-info-block {
+            width: 100%;
+            /* position: absolute;*/
+            top: 55px;
+            background: rgb(255, 255, 255);
+            z-index: 0;
+        }
+
+        .user-info-block .user-heading {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0 0;
+        }
+
+        .user-info-block .navigation {
+            float: left;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-bottom: 1px solid #428BCA;
+            border-top: 1px solid #428BCA;
+        }
+
+        .navigation li {
+            float: left;
+            margin: 0;
+            padding: 0;
+        }
+
+            .navigation li a {
+                padding: 20px 30px;
+                float: left;
+            }
+
+            .navigation li.active a {
+                background: #428BCA;
+                color: #fff;
+            }
+
+        .user-info-block .user-body {
+            float: left;
+            /*padding: 5%;*/
+            width: 99%;
+            border: 1px solid #ccc;
+        }
+
+        .user-body .tab-content > div {
+            float: left;
+            width: 100%;
+        }
+
+        .user-body .tab-content h4 {
+            width: 100%;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        #displaMessage {
+            margin-left: 50px;
+            z-index: 9999;
+            top: 131px;
+            position: absolute;
+            /* left: 85px; */
+            margin: 0 auto;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+
+        // Called when capture operation is finished
+        //
+        function captureSuccess(mediaFiles) {
+            var i, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                //alert(" upload this file");
+                uploadFile(mediaFiles[i]);
+            }
+        }
+
+        // Called if something bad happens.
+        // 
+        function captureError(error) {
+            var msg = 'An error occurred during capture: ' + error.code;
+            navigator.notification.alert(msg, null, 'Uh oh!');
+        }
+
+        // A button will call this function
+        //
+        function captureImage() {
+            // Launch device camera application, 
+            // allowing user to capture up to 2 images
+            navigator.device.capture.captureImage(captureSuccess, captureError, { limit: 2 });
+        }
+
+        // Upload files to server
+        function uploadFile(mediaFile) {
+            var ft = new FileTransfer(),
+                path = mediaFile.fullPath,
+                name = mediaFile.name;
+            $("#displaMessage").hide();
+            $("#disImage").attr("src", path);
+            /*ft.upload(path,
+                "http://my.domain.com/upload.php",
+                function(result) {
+                    console.log('Upload success: ' + result.responseCode);
+                    console.log(result.bytesSent + ' bytes sent');
+                },
+                function(error) {
+                    console.log('Error uploading file ' + path + ': ' + error.code);
+                },
+                { fileName: name });   */
+        }
 
     </script>
-    </head>
-    <body>
-        <button onclick="captureImage();">Capture Image</button> <br>	 
-		<div style="width:100px;height:100px;">
-		<img id="uploadedImage" src="#" />
-		
-		</div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+</head>
+<body>
+    <header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+
+            </div>
+            <div class="navbar-inverse side-collapse in">
+
+                <nav role="navigation" class="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#Home">Home</a></li>
+                        <li><a href="#users">Users</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Filter</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container side-collapse-container">
+        <div class="row">
+            <div class="user-details">
+                <div class="user-image">
+                    <span id="displaMessage" class="alert alert-info" onclick="captureImage()">Click to change the picture</span>
+                    <img src="img/male.jpg" id="disImage" alt="Vijay Paliwal" title="Vijay Paliwal" class="img-circle">
+                </div>
+                <div class="user-info-block">
+                    <div class="user-heading">
+                        <h3>Vijay Paliwal</h3>
+                        <span class="help-block">Rajasthan, IN</span>
+                    </div>
+                    <ul class="navigation">
+                        <li class="active">
+                            <a data-toggle="tab" href="#information">
+                                <span class="fa fa-user"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#settings">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#email">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#events">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="user-body">
+                        <div class="tab-content">
+                            <div id="information" class="tab-pane active">
+                                <div class="col-xs-12 col-sm-8">
+                                    <h2>Vijay Paliwal</h2>
+                                    <p><strong>About: </strong>Web Designer / UI. </p>
+                                    <p><strong>Hobbies: </strong>Read, out with friends, listen to music, draw and learn new things. </p>
+                                    <p>
+                                        <strong>Skills: </strong>
+                                        <span class="tags">html5</span>
+                                        <span class="tags">css3</span>
+                                        <span class="tags">jquery</span>
+                                        <span class="tags">bootstrap3</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="settings" class="tab-pane">
+                                <div class="container">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <p>Use the form below to change your password. Your password cannot be the same as your username.</p>
+                                        <form method="post" id="passwordForm">
+                                            <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+                                            <br />
+                                            <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
+                                           <br />
+                                            <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password">
+                                            <br />
+                                        </form>
+                                    </div>
+                                    <!--/col-sm-6-->
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div id="email" class="tab-pane">
+                                <h2>COMING SOON</h2>
+                            </div>
+                            <div id="events" class="tab-pane">
+                                <h2>COMING SOON</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="tile-progress tile-green">
+                    <div class="tile-header">
+                        <h3>My Dashboard</h3>
+                        <span>You can check your latest updates,friends requests,messages etc.</span>
+                    </div>
+                    <div class="tile-progressbar">
+                        <span data-fill="94%" style="width: 94%;"></span>
+                    </div>
+                    <div class="tile-footer">
+                        <h4>
+                            <span class="pct-counter">94</span>% Done
+                        </h4>
+                        <span>so far in our blog and our website</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="tile-progress tile-cyan">
+                    <div class="tile-header">
+                        <h3>Friends</h3>
+                        <span>Check friends detail, send messsages etc.Also can make new friends</span>
+                    </div>
+                    <div class="tile-progressbar">
+                        <span data-fill="45.9%" style="width: 45.9%;"></span>
+                    </div>
+                    <div class="tile-footer">
+                        <h4>
+                            <span class="pct-counter">45.9</span>% Friends connected
+                        </h4>
+                        <span>so far in our blog and our website</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="tile-progress tile-purple">
+                    <div class="tile-header">
+                        <h3>Visitors</h3>
+                        <span>so far in our blog, and our website visitors counter.
+                            We manage their information as well.
+                        </span>
+                    </div>
+                    <div class="tile-progressbar">
+                        <span data-fill="37%" style="width: 37%;"></span>
+                    </div>
+                    <div class="tile-footer">
+                        <h4>
+                            <span class="pct-counter">37</span>% Visited
+                        </h4>
+                        <span>so far in our blog and our website</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="tile-progress tile-pink">
+                    <div class="tile-header">
+                        <h3>Share</h3>
+                        <span>You can share your profile, photo,messages to any user you want.</span>
+                    </div>
+                    <div class="tile-progressbar">
+                        <span data-fill="3" style="width: 3%;"></span>
+                    </div>
+                    <div class="tile-footer">
+                        <h4>
+                            <span class="pct-counter">3</span>% increase
+                        </h4>
+                        <span>so far in our blog and our website</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/boot.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var sideslider = $('[data-toggle=collapse-side]');
+            var sel = sideslider.attr('data-target');
+            var sel2 = sideslider.attr('data-target-2');
+            sideslider.click(function (event) {
+                $(sel).toggleClass('in');
+                $(sel2).toggleClass('out');
+            });
+        });	</script>
+</body>
 </html>
