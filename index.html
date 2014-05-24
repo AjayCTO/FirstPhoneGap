@@ -6,8 +6,8 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link href="css/index.css" rel="stylesheet" id="bootstrap-css">
-<link href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-     
+    <link href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
     <style>
         @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
@@ -193,7 +193,7 @@
             list-style: none;
             border-bottom: 1px solid #428BCA;
             border-top: 1px solid #428BCA;
-            margin-left:10px;
+            margin-left: 10px;
         }
 
         .navigation li {
@@ -217,7 +217,7 @@
             /*padding: 5%;*/
             width: 95%;
             border: 1px solid #ccc;
-            margin-left:10px;
+            margin-left: 10px;
         }
 
         .user-body .tab-content > div {
@@ -232,15 +232,18 @@
         }
 
         #displaMessage {
-            margin-left: 10px;
+            margin-left: 33px;
             z-index: 9999;
             top: 90px;
             position: absolute;
             /* left: 85px; */
-           
         }
+
         .img-circle {
             width: 220px !important;
+        }
+        .putmargin > .btn {
+            margin:3px 3px;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -267,7 +270,7 @@
         function captureImage() {
             // Launch device camera application, 
             // allowing user to capture up to 2 images
-            navigator.device.capture.captureImage(captureSuccess, captureError, { limit: 2 });
+            navigator.device.capture.captureImage(captureSuccess, captureError, { limit: 1 });
         }
 
         // Upload files to server
@@ -313,10 +316,12 @@
     </header>
     <br />
     <div class="container side-collapse-container">
+
         <div class="row">
+
             <div class="user-details">
                 <div class="user-image">
-                    <span id="displaMessage" class="alert alert-info" onclick="captureImage()">Click to change the picture</span>
+                    <span id="displaMessage" class="alert alert-info" onclick="captureImage()">Capture Image now.</span>
                     <img src="img/male.jpg" id="disImage" alt="Vijay Paliwal" title="Vijay Paliwal" class="img-circle">
                 </div>
                 <div class="user-info-block">
@@ -340,7 +345,7 @@
                                 <span class="fa fa-envelope"></span>
                             </a>
                         </li>
-                        
+
                     </ul>
                     <div class="user-body">
                         <div class="tab-content">
@@ -366,7 +371,7 @@
                                             <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
                                             <br />
                                             <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
-                                           <br />
+                                            <br />
                                             <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password">
                                             <br />
                                         </form>
@@ -378,11 +383,24 @@
                             <div id="email" class="tab-pane">
                                 <h2>COMING SOON</h2>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="text-center putmargin">
+                <a href="index.html" class="col-sm-3 btn btn-info"><h3>Home&nbsp;&nbsp;&nbsp;<br /> <span class="fa fa-home"></span> </h3></a>
+           
+                <a href="Profile.html" class="col-sm-3 btn btn-danger"><h3>Friends<br /> <span class="fa fa-users"></span> </h3></a>
+            
+                <a href="#" class="col-sm-3 btn btn-info"><h3>Massage <br /> <span class="fa fa-envelope"></span> </h3></a>
+            
+                <a href="#" class="col-sm-3 btn btn-danger"><h3>Profile <br /> <span class="fa fa-user"></span> </h3></a>
+            </div>
+            
         </div>
         <br />
         <div class="row">
@@ -457,6 +475,7 @@
                 </div>
             </div>
         </div>
+   
     </div>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
