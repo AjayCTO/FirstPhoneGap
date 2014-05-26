@@ -1401,6 +1401,11 @@ pre {
         float: left;
     }
 
+    .middle
+    {
+        text-align:center;
+    }
+
     .col-lg-12 {
         width: 100%;
     }
@@ -5022,21 +5027,20 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .list-group-item {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    padding: 17px 15px;
+    font-size:18px;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px solid #ddd;
 }
 
     .list-group-item:first-child {
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
+     
     }
 
     .list-group-item:last-child {
         margin-bottom: 0;
-        border-bottom-right-radius: 4px;
-        border-bottom-left-radius: 4px;
+     
     }
 
     .list-group-item > .badge {
