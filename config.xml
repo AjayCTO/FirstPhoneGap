@@ -6,10 +6,10 @@
         id        = "com.phonegap.hello-world"
         version   = "1.0.0">
 
-    <name>Hello World</name>
+    <name>Social communication site</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Social communication site is application that use to create your own social with friends.
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">
