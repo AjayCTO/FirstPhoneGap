@@ -232,11 +232,13 @@
         }
 
         #displaMessage {
-            margin-left: 33px;
+          
             z-index: 9999;
-            top: 90px;
-            position: absolute;
-            /* left: 85px; */
+            top: 150px;
+            width:170px;
+            margin:0 auto;
+            position: relative;
+          
         }
 
         .img-circle {
@@ -303,7 +305,7 @@
             </div>
             <div class="navbar-inverse side-collapse in">
 
-                <div class="list-group hidden-lg">
+                <div class="list-group hidden-lg hidden-sm">
                 <a href="Profile.html" class="list-group-item active">
                     <i class="fa fa-search" ></i> Search
                   </a>
@@ -331,7 +333,7 @@
 
             <div class="user-details">
                 <div class="user-image">
-                    <span id="displaMessage" class="alert alert-info" onclick="captureImage()">Capture Image now.</span>
+                    <div id="displaMessage" class="alert alert-info" onclick="captureImage()">Capture Image now.</div>
                     <img src="img/male.jpg" id="disImage" alt="Vijay Paliwal" title="Vijay Paliwal" class="img-circle">
                 </div>
                 <div class="user-info-block">
@@ -374,7 +376,7 @@
                                 </div>
                             </div>
                             <div id="settings" class="tab-pane">
-                                <div class="container">
+                                <div style="padding:10px;" class="container">
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <p>Use the form below to change your password. Your password cannot be the same as your username.</p>
                                         <form method="post" id="passwordForm">
@@ -403,28 +405,26 @@
         <div class="row">
 
 
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                 <a style="width:100%" href="index.html" class="btn btn-info"><h3>Home&nbsp;&nbsp;&nbsp;<br /> <span class="fa fa-home"></span> </h3></a>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                 <a style="width:100%" href="index.html" class="btn btn-info"><h5>Home&nbsp;&nbsp;&nbsp;<br /> <span class="fa fa-home"></span> </h5></a>
             </div>
 
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                  <a style="width:100%" href="Profile.html" class=" btn btn-danger"><h3>Friends<br /> <span class="fa fa-users"></span> </h3></a>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                  <a style="width:100%" href="Profile.html" class=" btn btn-danger"><h5>Friends<br /> <span class="fa fa-users"></span> </h5></a>
             </div>
 
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                 <a style="width:100%" href="#" class="btn btn-info"><h3>Message <br /> <span class="fa fa-envelope"></span> </h3></a>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                 <a style="width:100%" href="#" class="btn btn-info"><h5>Message <br /> <span class="fa fa-envelope"></span> </h5></a>
             </div>
 
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                  <a style="width:100%" href="#" class="btn btn-danger"><h3>Profile <br /> <span class="fa fa-user"></span> </h3></a>
-            </div>
+        
 
          
             
         </div>
         <br />
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="tile-progress tile-green">
                     <div class="tile-header">
                         <h3>My Dashboard</h3>
@@ -441,7 +441,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="tile-progress tile-cyan">
                     <div class="tile-header">
                         <h3>Friends</h3>
@@ -458,7 +458,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="tile-progress tile-purple">
                     <div class="tile-header">
                         <h3>Visitors</h3>
@@ -477,23 +477,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="tile-progress tile-pink">
-                    <div class="tile-header">
-                        <h3>Share</h3>
-                        <span>You can share your profile, photo,messages to any user you want.</span>
-                    </div>
-                    <div class="tile-progressbar">
-                        <span data-fill="3" style="width: 3%;"></span>
-                    </div>
-                    <div class="tile-footer">
-                        <h4>
-                            <span class="pct-counter">3</span>% increase
-                        </h4>
-                        <span>so far in our blog and our website</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
    
     </div>
