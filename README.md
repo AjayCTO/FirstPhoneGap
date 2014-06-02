@@ -1,2 +1,4 @@
-hottowel-angular-bower
-======================
+FirstPhoneGap
+=============
+
+FirstPhoneGap for image capturing
