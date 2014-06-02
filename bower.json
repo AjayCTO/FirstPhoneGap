@@ -1,0 +1,16 @@
+{
+  "name": "angular.hottowel",
+  "version": "1.0.0",
+  "main": ["angular.js", "angular-route.js", "angular-animate.js"],
+  "ignore": [
+	".md"
+  ],
+  "dependencies": {
+                "jquery": ">=1.6.3",
+                "momentjs": ">=2.1.0",
+                "font-awesome": "3.2.1",
+                "bootstrap": ">=2.3.2 <3.0.0",
+                "toastr": ">=2.0.1",
+                "spinjs": ">=1.3"
+  }
+}

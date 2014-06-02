@@ -1,0 +1,44 @@
+﻿<section id="dashboard-view" class="mainbar" data-ng-controller="dashboard as vm">
+    <section class="matter">
+        <div class="container-fluid">
+
+
+            <div class="demo-section k-header">
+                <div class="todo-head col-lg-12" style="margin-bottom: 52px">
+                    <input id="filter" type="text" onchange="" class="input-lg col-lg-12 col-sm-12 col-md-12 col-xs-12" placeholder="Search...." />
+                </div>
+
+                <div id="touch-scroller" class="col-lg-12 col-sm-12 col-md-12 col-xs-12" style="height: 1000px">
+                    <ul id="flat-listview"></ul>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</section>
+
+
+<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
+                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 alert alert-warning" style="margin-bottom:0">
+                  
+                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
+                       <img style="height:68px;width:68px" src="../../Content/images/#=id#.jpg" />
+                     </div>
+                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">#=name#</div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
+                       <a class="btn btn-info">Give <i class="fa fa-plus"></i></a>
+                    </div>
+
+                </div>
+</script>
+
+
+<style>
+    #flat-listview li {
+        padding: 0;
+    }
+</style>
+
+
+
