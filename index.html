@@ -7,11 +7,13 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link href="css/index.css" rel="stylesheet" id="bootstrap-css">
     <link href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-  <link href="content/kendo.common.min.css" rel="stylesheet" />
-    <link href="content/kendo.silver.min.css" rel="stylesheet" />
-    <link href="content/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="content/kendo.dataviz.min.css" rel="stylesheet" />
-    <link href="content/kendo.dataviz.silver.min.css" rel="stylesheet" />
+	<link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.silver.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.silver.mobile.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.528/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
+
     <style>
         @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
@@ -19,6 +21,7 @@
             padding-top: 50px;
             position: relative;
             font-family: 'Lato', 'sans-serif';
+			 
         }
 
         pre {
@@ -29,294 +32,55 @@
             background-color: #163752 !important;
         }
 
-        @media screen and (max-width: 768px) {
-            .side-collapse-container {
-                width: 100%;
-                position: relative;
-                left: 0;
-                transition: left .4s;
-            }
-
-                .side-collapse-container.out {
-                    left: 200px;
-                }
-
-            .side-collapse {
-                top: 50px;
-                bottom: 0;
-                left: 0;
-                width: 200px;
-                position: fixed;
-                overflow: hidden;
-                transition: width .4s;
-            }
-
-                .side-collapse.in {
-                    width: 0;
-                }
-        }
-
-        .tile-progress {
-            background-color: #303641;
-            color: #fff;
-        }
-
-        .tile-progress {
-            background: #00a65b;
-            color: #fff;
-            margin-bottom: 20px;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            -webkit-background-clip: padding-box;
-            -moz-background-clip: padding;
-            background-clip: padding-box;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
-
-            .tile-progress .tile-header {
-                padding: 15px 20px;
-                padding-bottom: 40px;
-            }
-
-            .tile-progress .tile-progressbar {
-                height: 2px;
-                background: rgba(0,0,0,0.18);
-                margin: 0;
-            }
-
-                .tile-progress .tile-progressbar span {
-                    background: #fff;
-                }
-
-                .tile-progress .tile-progressbar span {
-                    display: block;
-                    background: #fff;
-                    width: 0;
-                    height: 100%;
-                    -webkit-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
-                    -moz-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
-                    -o-transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
-                    transition: all 1.5s cubic-bezier(0.230,1.000,0.320,1.000);
-                }
-
-            .tile-progress .tile-footer {
-                padding: 20px;
-                text-align: right;
-                background: rgba(0,0,0,0.1);
-                -webkit-border-radius: 0 0 3px 3px;
-                -webkit-background-clip: padding-box;
-                -moz-border-radius: 0 0 3px 3px;
-                -moz-background-clip: padding;
-                border-radius: 0 0 3px 3px;
-                background-clip: padding-box;
-                -webkit-border-radius: 0 0 3px 3px;
-                -moz-border-radius: 0 0 3px 3px;
-                border-radius: 0 0 3px 3px;
-            }
-
-            .tile-progress.tile-red {
-                background-color: #f56954;
-                color: #fff;
-            }
-
-        .tile-progress {
-            background-color: #303641;
-            color: #fff;
-        }
-
-            .tile-progress.tile-blue {
-                background-color: #0073b7;
-                color: #fff;
-            }
-
-            .tile-progress.tile-aqua {
-                background-color: #00c0ef;
-                color: #fff;
-            }
-
-            .tile-progress.tile-green {
-                background-color: #00a65a;
-                color: #fff;
-            }
-
-            .tile-progress.tile-cyan {
-                background-color: #00b29e;
-                color: #fff;
-            }
-
-            .tile-progress.tile-purple {
-                background-color: #ba79cb;
-                color: #fff;
-            }
-
-            .tile-progress.tile-pink {
-                background-color: #ec3b83;
-                color: #fff;
-            }
-
-        .user-details {
-            position: relative;
-            padding: 0;
-        }
-
-            .user-details .user-image {
-                position: relative;
-                z-index: 1;
-                width: 100%;
-                text-align: center;
-            }
-
-        .user-image img {
-            clear: both;
-            margin: auto;
-            position: relative;
-        }
-
-        .user-details .user-info-block {
-            width: 100%;
-            /* position: absolute;*/
-            top: 55px;
-            background: rgb(255, 255, 255);
-            z-index: 0;
-        }
-
-        .user-info-block .user-heading {
-            width: 100%;
-            text-align: center;
-            margin: 10px 0 0;
-        }
-
-        .user-info-block .navigation {
-            float: left;
-            width: 95%;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            border-bottom: 1px solid #428BCA;
-            border-top: 1px solid #428BCA;
-            margin-left: 10px;
-        }
-
-        .navigation li {
-            float: left;
-            margin: 0;
-            padding: 0;
-        }
-
-            .navigation li a {
-                padding: 20px 30px;
-                float: left;
-            }
-
-            .navigation li.active a {
-                background: #428BCA;
-                color: #fff;
-            }
-
-        .user-info-block .user-body {
-            float: left;
-            /*padding: 5%;*/
-            width: 95%;
-            border: 1px solid #ccc;
-            margin-left: 10px;
-        }
-
-        .user-body .tab-content > div {
-            float: left;
-            width: 100%;
-        }
-
-        .user-body .tab-content h4 {
-            width: 100%;
-            margin: 10px 0;
-            color: #333;
-        }
-
-        #displaMessage {
-          
-            z-index: 9999;
-            top: 150px;
-            width:170px;
-            margin:0 auto;
-            position: relative;
-          
-        }
-
-        .img-circle {
-            width: 220px !important;
-        }
-        .putmargin > .btn {
-            margin:3px 3px;
-        }
+         #listView
+		 {
+		  border:0px !important;
+		 }
     </style>
-    
+     
 </head>
 <body>
     <header role="banner" class="navbar navbar-fixed-top navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <!--<button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
+                <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 <div class="brand"><a class="navbar-brand" href="#">Shivam ITCS</a></div>
-            </div>
-             
-             
+            </div>            
         </div>
     </header>
     <br />
-    <div class="container side-collapse-container">
-
-        
-    <section class="matter">
-        <div class="container-fluid">
-
-
-            <div class="demo-section k-header">
-                <div class="todo-head col-lg-12" style="margin-bottom: 52px">
-                    <input id="filter" type="text" onchange="" class="input-lg col-lg-12 col-sm-12 col-md-12 col-xs-12" placeholder="Search...." />
-                </div>
-
-                <div id="touch-scroller" class="col-lg-12 col-sm-12 col-md-12 col-xs-12" style="height: 1000px">
-                    <ul id="flat-listview"></ul>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-
-
-
-<style>
-    #flat-listview li {
-        padding: 0;
-    }
-</style>
+    <div class="container">
+				 
+                    <input id="filter" type="text" onchange="" class="input-lg col-sm-12" placeholder="Search...." />
+					<br/>
+					<br/>
+					<br/>
+					<div id="listView"></div>
+                 
+       
+       
    
     </div>
-	<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
-                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 alert alert-warning" style="margin-bottom:0">
-                  
-                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                       <img style="height:68px;width:68px" src="content/images/#=id#.jpg" />
-                     </div>
-                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">#=name#</div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                       <a class="btn btn-info">Give <i class="fa fa-plus"></i></a>
-                    </div>
-
-                </div>
-</script>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/boot.js"></script>
-	 <script src="js/kendo.all.min.js"></script>
+	<script src="http://cdn.kendostatic.com/2014.1.528/js/kendo.all.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.1.528/js/kendo.timezones.min.js"></script>
+<script type="text/x-kendo-template" id="template">
+        
+        <div class="media">
+			  <a class="pull-left">
+				<img class="media-object thumbnail" data-src="holder.js/64x64" alt="64x64" src="img/#=id#.jpg" style="width: 64px; height: 64px;">
+			  </a>
+			  <div class="media-body">
+				<h4 class="media-heading">#=name#</h4>
+				 <p>Some text goes here Some text goes here Some text goes here </p>
+			  </div>
+			  
+    </div>
+        <hr/>
+    </script>
     <script type="text/javascript">
         app.initialize();
     </script>
@@ -329,9 +93,7 @@
                 $(sel).toggleClass('in');
                 $(sel2).toggleClass('out');
             });
-        });	
-		
-		var people = [
+			var people = [
                 { id: "1", name: "test1", description: "" },
                 { id: "2", name: "test2", description: "" },
                 { id: "3", name: "test3", description: "" },
@@ -355,45 +117,12 @@
                 { id: "21", name: "test21", description: "" }
 
             ];
-
-            var dataSource = new kendo.data.DataSource({
-                type: "odata",
-                //transport: {
-                //    read: {
-                //        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                //    }
-                //},   
-                data:people,
-                serverPaging: true,
-                schema: {
-                    model: {
-                        fields: {
-                            id: { type: "number" },
-                            name: { type: "string" },
-                            description: { type: "string" },
-                           
-                        }
-                    }
-                },
-               // serverFiltering: true,
-                serverSorting: true,             
-                pageSize: 50
+			$("#listView").kendoListView({
+                dataSource: people,
+                template: kendo.template($("#template").html())
             });
-
-            $("#touch-scroller").kendoMobileScroller();
-
-            $("#flat-listview").kendoMobileListView({
-                dataSource: dataSource,
-                template: $("#endless-scrolling-template").text(),
-                //endlessScroll: true              
-                //filterable: {
-                //    field: "name",
-                //    operator: "startswith"
-                //},
-            });
-
-            $("#filter").keypress(function() {
-                var ds = $("#flat-listview").data("kendoMobileListView").dataSource;
+			$("#filter").blur(function() {
+                var ds = $("#listView").data("kendoListView").dataSource;
                 var value = $(this).val();
                 ds.filter([
                     {
@@ -403,7 +132,6 @@
                     }
                 ]);
             });
-		
-		</script>
+        });	</script>
 </body>
 </html>
