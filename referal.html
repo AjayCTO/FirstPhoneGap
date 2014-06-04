@@ -30,8 +30,14 @@
             tab-size: 8;
         }
 
-        .navbar-inverse {
-            background-color: #163752 !important;
+         .navbar-inverse {
+            background-color: #3A8AC7 !important;
+            color:#fff;
+        }
+
+        .brand a
+        {
+            color:#fff !important;
         }
 
          #listView
@@ -134,16 +140,18 @@
 .left-arrow {
 	width: 0; 
 	height: 0; 
-	border-top: 17px solid transparent;
+	border-top: 19px solid transparent;
 	border-bottom: 16px solid transparent;
     float:right;
 	
-	border-right: 17px solid #d43f3a;
+	border-right: 17px solid #3A8AC7;
 }
 
         .btn-danger
         {
             border-radius:0px;
+            background:#3A8AC7 !important;
+            border:2px solid #3A8AC7 !important;
         }
 
     </style>
@@ -154,7 +162,7 @@
         <div class="container">
             <div class="navbar-header">
                 <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <div class="brand"><a class="navbar-brand" href="#">Shivam ITCS</a></div>
+                <div class="brand"><a class="navbar-brand" href="#"> indys411 security check</a></div>
             </div>            
         </div>
     </header>
@@ -189,18 +197,8 @@
                 <div class="text">*</div>
             </div>
         </div>
-        <div class="required-field-block">
-            <input type="text" placeholder="Subject" class="form-control">
-            <div class="required-icon" data-original-title="" title="">
-                <div class="text">*</div>
-            </div>
-        </div>
-        <div class="required-field-block">
-            <textarea rows="3" class="form-control" placeholder="Message"></textarea>
-            <div class="required-icon" data-original-title="" title="">
-                <div class="text">*</div>
-            </div>
-        </div>
+       
+      
         <br />
         <div class="row">
             <div class="col-md-12">
@@ -224,27 +222,27 @@
         $(document).ready(function () {
            
 			var people = [
-                { id: "1", name: "test1", description: "Some text goes here Some text goes here Some text goes here",score:"45" },
-                { id: "2", name: "test2", description: "Some text goes here Some text goes here Some text goes here",score:"12" },
-                { id: "3", name: "test3", description: "Some text goes here Some text goes here Some text goes here",score:"59"},
-                { id: "4", name: "test4", description: "Some text goes here Some text goes here Some text goes here",score:"36" },
-                { id: "5", name: "test5", description: "Some text goes here Some text goes here Some text goes here",score:"48" },
-                { id: "6", name: "test6", description: "Some text goes here Some text goes here Some text goes here",score:"25" },
-                { id: "7", name: "test7", description: "Some text goes here Some text goes here Some text goes here",score:"78" },
-                { id: "8", name: "test8", description: "Some text goes here Some text goes here Some text goes here",score:"25" },
-                { id: "9", name: "test9", description: "Some text goes here Some text goes here Some text goes here",score:"9" },
-                { id: "10", name: "test10", description: "Some text goes here Some text goes here Some text goes here",score:"45" },
-                { id: "11", name: "test11", description: "Some text goes here Some text goes here Some text goes here",score:"65" },
-                { id: "12", name: "test12", description: "Some text goes here Some text goes here Some text goes here",score:"59" },
-                { id: "13", name: "test13", description: "Some text goes here Some text goes here Some text goes here",score:"35" },
-                { id: "14", name: "test14", description: "Some text goes here Some text goes here Some text goes here",score:"16" },
-                { id: "15", name: "test15", description: "Some text goes here Some text goes here Some text goes here",score:"95" },
-                { id: "16", name: "test16", description: "Some text goes here Some text goes here Some text goes here",score:"75" },
-                { id: "17", name: "test17", description: "Some text goes here Some text goes here Some text goes here",score:"65" },
-                { id: "18", name: "test18", description: "Some text goes here Some text goes here Some text goes here",score:"35" },
-                { id: "19", name: "test19", description: "Some text goes here Some text goes here Some text goes here",score:"15" },
-                { id: "20", name: "test20", description: "Some text goes here Some text goes here Some text goes here",score:"45" },
-                { id: "21", name: "test21", description: "Some text goes here Some text goes here Some text goes here",score:"68" }
+               { id: "1", name: "Test1", description: "Some text goes here Some text goes here Some text goes here", score: "45" },
+                { id: "2", name: "Test2", description: "Some text goes here Some text goes here Some text goes here", score: "12" },
+                { id: "3", name: "Test3", description: "Some text goes here Some text goes here Some text goes here", score: "59" },
+                { id: "4", name: "Test4", description: "Some text goes here Some text goes here Some text goes here", score: "36" },
+                { id: "5", name: "Test5", description: "Some text goes here Some text goes here Some text goes here", score: "48" },
+                { id: "6", name: "Test6", description: "Some text goes here Some text goes here Some text goes here", score: "25" },
+                { id: "7", name: "Test7", description: "Some text goes here Some text goes here Some text goes here", score: "78" },
+                { id: "8", name: "Test8", description: "Some text goes here Some text goes here Some text goes here", score: "25" },
+                { id: "9", name: "Test9", description: "Some text goes here Some text goes here Some text goes here", score: "9" },
+                { id: "10", name: "Test10", description: "Some text goes here Some text goes here Some text goes here", score: "45" },
+                { id: "11", name: "Test11", description: "Some text goes here Some text goes here Some text goes here", score: "65" },
+                { id: "12", name: "Test12", description: "Some text goes here Some text goes here Some text goes here", score: "59" },
+                { id: "13", name: "Test13", description: "Some text goes here Some text goes here Some text goes here", score: "35" },
+                { id: "14", name: "Test14", description: "Some text goes here Some text goes here Some text goes here", score: "16" },
+                { id: "15", name: "Test15", description: "Some text goes here Some text goes here Some text goes here", score: "95" },
+                { id: "16", name: "Test16", description: "Some text goes here Some text goes here Some text goes here", score: "75" },
+                { id: "17", name: "Test17", description: "Some text goes here Some text goes here Some text goes here", score: "65" },
+                { id: "18", name: "Test18", description: "Some text goes here Some text goes here Some text goes here", score: "35" },
+                { id: "19", name: "Test19", description: "Some text goes here Some text goes here Some text goes here", score: "15" },
+                { id: "20", name: "Test20", description: "Some text goes here Some text goes here Some text goes here", score: "45" },
+                { id: "21", name: "Test21", description: "Some text goes here Some text goes here Some text goes here", score: "68" }
 
 			];
 			
