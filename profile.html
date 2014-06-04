@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <title></title>
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link href="css/index.css" rel="stylesheet" id="bootstrap-css">
@@ -38,13 +39,50 @@
 		 }
 		 .labelItem
 		 {
-		 position: absolute;
-		margin-top: -46px;
-		margin-left: 4px;
-		/* padding: 8px; */
-		font-size: 14px;
+	 background:#E44A00;
 
 		 }
+
+        .center
+        {
+            text-align:center;
+        }
+
+            .arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 25px solid transparent;
+	border-right: 2px solid transparent;
+    margin-left:8px;
+    float:right;
+	
+	border-top: 25px solid #E44A00;
+}
+
+            .left-arrow {
+	width: 0; 
+	height: 0; 
+	border-top: 17px solid transparent;
+	border-bottom: 16px solid transparent;
+    float:right;
+	
+	border-right: 17px solid #d43f3a;
+}
+
+        .btn-danger
+        {
+            border-radius:0px;
+        }
+        .btn-primary
+        {
+              border-radius:0px;
+        }
+
+         .btn-info
+        {
+              border-radius:0px;
+        }
+
     </style>
      
 </head>
@@ -65,36 +103,41 @@
                  <h3 id="name"> </h3>
                  <hr />
                  </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <img src="#" class="img-responsive thumbnail" id="imageOfuser" alt="Alternate Text" />
+            <div class="col-md-6 col-sm-6 col-xs-6 center">
+                   <span class="img-responsive labelItem" id="score" style="font-size: 80px; color:#fff; "></span>
+                <span class="arrow-down"></span>
+
+                <br />
+               
+                <div class="col-md-12 col-sm-12 col-xs-12">
+          
+            <p style="text-align:left;" id="desc"></p>
+        </div>
+             
             </div>
-             <div class="col-md-6 col-sm-6 col-xs-6 text-center" style="margin-top:10px;">
-                 <img src="img/hook3.png" alt="Alternate Text" style="margin-bottom:-25px;" />
-                <span class="alert alert-danger img-responsive" id="score" style="font-size: 80px;"></span>
+             <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                <img src="#" class="img-responsive thumbnail" id="imageOfuser" alt="Alternate Text" />
             </div>
         </div>
         <hr />
-        <div class="col-md-12 col-sm-12 col-xs-12">
-             <strong>Description</strong><br />
-            <p id="desc"></p>
-        </div>
+        
        <div class="row omb_row-sm-offset-3 omb_socialButtons">
     	    <div class="col-xs-4 col-sm-2">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+		        <a href="#" class="btn btn-primary btn-lg btn-block omb_btn-facebook">
 			        <i class="fa fa-facebook visible-xs"></i>
-			        <span class="hidden-xs">Facebook</span>
+			        <span class="">Facebook</span>
 		        </a>
 	        </div>
         	<div class="col-xs-4 col-sm-2">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+		        <a href="#" class="btn btn-info btn-lg btn-block omb_btn-twitter">
 			        <i class="fa fa-twitter visible-xs"></i>
-			        <span class="hidden-xs">Twitter</span>
+			        <span class="">Twitter</span>
 		        </a>
 	        </div>	
         	<div class="col-xs-4 col-sm-2">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+		        <a href="#" class="btn btn-danger btn-lg btn-block omb_btn-google">
 			        <i class="fa fa-google-plus visible-xs"></i>
-			        <span class="hidden-xs">Google+</span>
+			        <span class="s">Google+</span>
 		        </a>
 	        </div>	
 		</div>
@@ -148,7 +191,7 @@
 			for (var i = 0; i < people.length; i++) {
 			    if (itemId == people[i].id) {
 			        currentItem = people[i];
-			        $("#name").html(currentItem.name + '<a href="#" id="back" class="btn btn-danger pull-right"><i class="fa fa-backward"></i></a>');
+			        $("#name").html(currentItem.name + '<a href="#" id="back" class="btn btn-danger pull-right">Back</a><span class="left-arrow"></span>');
 			        $("#score").html(currentItem.score);
 			        $("#desc").html(currentItem.description);
 			        $("#imageOfuser").attr("src", "img/" + currentItem.id + ".jpg");
