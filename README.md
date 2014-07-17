@@ -1,4 +1,4 @@
-FirstPhoneGap
-=============
+phonegap-jqm-boilerplate
+========================
 
-FirstPhoneGap for image capturing
+Boilerplate App for jQuery Mobile Phonegap Application
