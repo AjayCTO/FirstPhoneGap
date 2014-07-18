@@ -27,14 +27,19 @@ function onDeviceReady()
 function onPhotoURISuccess(imageURI) 
 {
     console.log(imageURI);
-    var largeImage = document.getElementById('largeImage');
-    largeImage.style.display = 'block';
-    largeImage.src = imageURI;
+   // var largeImage = document.getElementById('largeImage');
+  //  largeImage.style.display = 'block';
+   // largeImage.src = imageURI;
+	var img = $('<img />');
+	img.attr('src', imageURI);
+
+	// Append new img to our photos div
+	img.appendTo('#photos');
 }
 
 function onPhotoDataSuccess(imageURI) 
 { 
-    var imgProfile = document.getElementById('imgProfile');
+    var imgProfile = document.getElementById('clicked');
     imgProfile.src = imageURI;
     if(sessionStorage.isprofileimage==1)
     {
@@ -128,6 +133,11 @@ function onFail(message)
  			<button onclick="capturePhotoEdit();">Capture Photo</button>
 			<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Gallery!!</button>
  		</div>
+		<div id="photos">
+		</div>
+		<div >
+		<img src="#" id="clicked" class="thumbnail" />
+		</div>
  		<div data-role="footer" data-position="fixed">		
  			<h1>&copy; Footer Text</h1>
  		</div>
