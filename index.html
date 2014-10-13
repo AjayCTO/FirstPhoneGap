@@ -1,147 +1,67 @@
 <!DOCTYPE html>
-<html>
- <head>
- 	<meta charset="UTF-8" />
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<title>Title</title>
- 	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" type="text/css">
- 	<script type="text/javascript" src="js/jquery.js"></script>
- 	<script type="text/javascript" src="js/app.js"></script>
- 	<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
- 	<script type="text/javascript" src="cordova.js"></script>
- 	<link rel="stylesheet" href="css/app.css" type="text/css">
-	<script type="text/javascript" charset="utf-8">
 
-var pictureSource;   
-var destinationType; 
+<!-- define angular app -->
+<html ng-app="app">
 
-document.addEventListener("deviceready",onDeviceReady,false);
+<head>
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+     
+     
+    <!-- SPELLS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+   <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js'></script>   
+     
+    <script src="Index.js"></script>
+</head>
 
-function onDeviceReady() 
-{
-    pictureSource=navigator.camera.PictureSourceType;
-    destinationType=navigator.camera.DestinationType;
-}
+<!-- define angular controller -->
+<body>
 
+    <div ng-app='app' class="container">
+        <div  ng-controller="PageController">
+            <div class="page-header">
+                <h2>{{ title }} :  <span ng-show="isAdmin">Admin</span> <span ng-show="isCustomer">Customer</span></h2>
+            </div>          
+             <userinfo ></userinfo>
+        </div>
+        <br />
+        
+    </div>
+    <footer class="text-center">
+        Footer
+    </footer>
 
-function onPhotoURISuccess(imageURI) 
-{
-    console.log(imageURI);
-   // var largeImage = document.getElementById('largeImage');
-  //  largeImage.style.display = 'block';
-   // largeImage.src = imageURI;
-	var img = $('<img />');
-	img.attr('src', imageURI);
+</body>
 
-	// Append new img to our photos div
-	img.appendTo('#photos');
-}
-
-function onPhotoDataSuccess(imageURI) 
-{ 
-    var imgProfile = document.getElementById('clicked');
-    imgProfile.src = imageURI;
-    if(sessionStorage.isprofileimage==1)
-    {
-        getLocation();
-    }
-    movePic(imageURI);
-}
-
-function onFail(message) 
-{
-    alert('Failed because: ' + message);
-}
-
-function movePic(file)
-{ 
-    window.resolveLocalFileSystemURI(file, resolveOnSuccess, resOnError); 
-} 
-
-function resolveOnSuccess(entry)
-{ 
-    var d = new Date();
-    var n = d.getTime();
-    var newFileName = n + ".jpg";
-    var myFolderApp = "MyAppFolder";
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) 
-    {      
-        fileSys.root.getDirectory( myFolderApp,
-                {create:true, exclusive: false},
-                function(directory) 
-                {
-                    entry.moveTo(directory, newFileName,  successMove, resOnError);
-                },
-        resOnError);
-    },
-    resOnError);
-}
-
-function successMove(entry) 
-{
-    sessionStorage.setItem('imagepath', entry.fullPath);
-}
-
-function resOnError(error) 
-{
-    alert(error.code);
-}
-
-function capturePhotoEdit() 
-{
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
-    destinationType: destinationType.DATA_URL });
-}
-
-function getPhoto(source) 
-{
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
-    destinationType: destinationType.FILE_URI,
-    sourceType: source });
-}
-
-function onFail(message) 
-{
-    alert('Failed because: ' + message);
-}
-
-</script>
- </head>
- <body>
- 	<div data-role="page" id="login">
- 		<div data-role="content">
- 			<br><br><div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed="false">
-			    <h4>Boilerplate Login Panel</h4>
-			    <div data-role="fieldcontain">
-			    <label for="textinput-fc">Username:</label>
-			    <input type="text" name="textinput-fc" id="textinput-fc" placeholder="Email Address / Username" value="">
-			</div>
-			<div data-role="fieldcontain">
-			    <label for="textinput-fc">Password:</label>
-			    <input type="text" name="textinput-fc" id="textinput-fc" placeholder="Password" value="">
-			</div>
- 			<a href="#home" data-role="button" data-transition="none">Click to Login</a>
-			</div>
- 		</div>
- 	</div>
-
- 	<div data-role="page" id="home" data-add-back-btn="true">
- 		<div data-role="header">
- 			<h1>Header Text</h1>
- 		</div>
- 		<div data-role="content">
- 			<button onclick="capturePhotoEdit();">Capture Photo</button>
-			<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Gallery!!</button>
- 		</div>
-		<div id="photos">
-		</div>
-		<div >
-		<img src="#" id="clicked" class="thumbnail" />
-		</div>
- 		<div data-role="footer" data-position="fixed">		
- 			<h1>&copy; Footer Text</h1>
- 		</div>
-
- 	</div>
- </body>
 </html>
+<style>
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+        color: #666666;
+    }
+
+    .content {
+        width: 740px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: rgba(100,100,100,.1);
+        border: 1px solid rgba(0,0,0,.1);
+        border-radius: 3px;
+    }
+
+    header {
+        text-align: center;
+    }
+
+    .user {
+        font-size: 0.9em;
+        padding: 10px;
+        margin: 20px 0;
+        background-color: rgba(255, 255, 255,.8);
+        border: 1px solid white;
+        border-radius: 3px;
+        color: grey;
+    }
+</style>
