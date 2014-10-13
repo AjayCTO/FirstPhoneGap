@@ -1,0 +1,12 @@
+body {
+}
+#qr-canvas {
+	display: none;
+}
+
+#result {
+	border: solid;
+	border-width: 1px 1px 1px 1px;
+	padding: 20px;
+	width: 70%;
+}

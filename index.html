@@ -1,216 +1,254 @@
-﻿<!DOCTYPE html>
-<html class="ui-mobile">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- base href="http://demos.jquerymobile.com/1.4.4/pages-multi-page/#one" -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Demo-page</title>
-    <link rel="stylesheet" href="content/jquery.css">
-    <link rel="stylesheet" href="content/jqm-demos.css">
-    <!--<link rel="shortcut icon" href="http://demos.jquerymobile.com/1.4.4/favicon.ico">-->
-    <script src="content/jquery_002.js"></script>
-    <!--<script src="content/index.js"></script>-->
-    <script src="content/jquery.js"></script>
-
-    <script type="text/javascript" src="https://jqueryjs.googlecode.com/files/jquery-1.3.2.js"></script>
-    <script type="text/javascript" src="https://jquery-barcode.googlecode.com/svn/trunk/jquery-barcode/demo/jquery.barcode.0.3.js"></script>
-    
-    <script type="text/javascript" src="https://raw.github.com/EddieLa/BarcodeReader/master/src/DecoderWorker.js"></script>
-
-
-</head>
-
-<body class="ui-mobile-viewport ui-overlay-a">
-
-    <!-- Start of first page: #one -->
-    <div style="min-height: 821px;" class="ui-page ui-page-theme-a ui-page-active" tabindex="0" data-url="one" data-role="page" id="one">
-
-        <div class="ui-header ui-bar-inherit" role="banner" data-role="header">
-            <h1 aria-level="1" role="heading" class="ui-title">Barcode Generator</h1>
-        </div><!-- /header -->
-
-        <form role="main" class="ui-content">
-            <h2>Barcode Generator</h2>
-
-            <!--<p>I have an <code>id</code> of "one" on my page container. I'm first in the source order so I'm shown when the page loads.</p>
-
-            <p>
-                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
-                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
-            </p>
-            <p>
-                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
-                some text some text some text some text some text some text some text some text some text some text
-            </p>
-            <p>You link to internal pages by referring to the <code>id</code> of the page you want to show. For example, to <a class="ui-link" href="#two">link</a> to the page with an <code>id</code> of "two", my link would have a <code>href="#two"</code> in the code.</p>-->
-
-
-            <!--<div data-role="content">
-                <h4>CODE 39:</h4>
-                <input type="text" id="code_39" size="16" />
-                <a data-inline="true" data-role="button" onclick="generateC39();" style="float: right; top: -47px;">Generate Barcode</a> </br>
-                <div class="barcode39" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"></div>
-                </br> </br> </br>
-                <h4>CODE 2 of 5 Interleaved:</h4>
-                <input type="text" id="code_i25" size="16" />
-                <a data-inline="true" data-role="button" onclick="generateI25();" style="float: right; top: -47px;">Generate Barcode</a></br>
-                <div class="barcodeI25" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"></div>
-            </div>-->
-
-
-
-            <form>
-                <h4>CODE 39:</h4>
-                <input name="text-basic" id="code_39" value="" type="text">
-                <input value="Generate Barcode" type="button" onclick="generateC39();">
-                <div class="barcode39" style="width: 100%; height: 120px; border: 1px solid red;"></div>
-                </br> </br> </br>
-                <h4>CODE 2 of 5 Interleaved:</h4>
-                <input name="text-basic" id="code_i25" value="" type="text">
-                <input value="Generate Barcode" type="button" onclick="generateI25();">
-                <div class="barcodeI25" style="width: 100%; height: 120px; border: 1px solid red;"></div>
-            </form>
-
-
-
-
-
-
-
-            <br /><br />
-
-
-            <!--<h3>Show internal pages:</h3>-->
-            <!--<p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Barcode Scanner</a></p>-->
-            <!--<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>-->
-        </div><!-- /content -->
-
-
-
-
-        <!--<div class="ui-footer ui-bar-a" role="contentinfo" data-role="footer" data-theme="a">
-            <h4 aria-level="1" role="heading" class="ui-title">Barcode Generator and Scanner</h4>
-        </div>-->
-
-    <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
-
-        <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-            <ul class="ui-grid-a">
-                <li class="ui-block-a">
-
-                    <a href="#one" rel="external" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="a" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-a" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Barcode Generator</span></span></a>
-
-
-                </li>
-                <li class="ui-block-b" data-theme="c">
-                    <a href="#two" data-theme="c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-c" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Barcode Scanner</span></span></a>
-
-                </li>
-            </ul>
-        </div>
-
-
-    </div>
-
-
-
-    <!-- /footer -->
-    </div><!-- /page one -->
-
-
-    <!-- Start of second page: #two -->
-    <div style="min-height: 821px;" class="ui-page ui-page-theme-a" tabindex="0" data-url="two" data-role="page" id="two" data-theme="a">
-
-        <div class="ui-header ui-bar-inherit" role="banner" data-role="header">
-            <h1 aria-level="1" role="heading" class="ui-title">Barcode Scanner</h1>
-        </div><!-- /header -->
-
-        <div role="main" class="ui-content">
-            <h2>Barcode Scanner</h2>
-            <!--<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
-            <p>
-                Notice that the theme is different for this page because we've added a few <code>data-theme</code>
-                swatch assigments here to show off how flexible it is. You can add any
-                content or widget to these pages, but we're keeping these simple.
-            </p>-->
-            <img src="12345.bmp" id="Image" />
-            </br>
-            <a data-role="button" data-inline="true" id="Decode">Decode</a>
-            </br>
-            <div id="Result"></div>
-
-            <p><a href="#one" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "Barcode Generator"</a></p>
-
-        </div><!-- /content -->
-
-        <!--<div class="ui-footer ui-bar-inherit" role="contentinfo" data-role="footer">
-            <h4 aria-level="1" role="heading" class="ui-title">Shivam IT CS</h4>
-        </div>-->
-        <!-- /footer -->
-    </div>
-    <!-- /page two -->
-
-
-
-    <!-- Start of third page: #popup -->
-    <div data-url="popup" data-role="page" id="popup">
-
-        <div data-role="header" data-theme="b">
-            <h1>Dialog</h1>
-        </div><!-- /header -->
-
-        <div role="main" class="ui-content">
-            <h2>Popup</h2>
-            <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
-            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Back to page "one"</a></p>
-        </div><!-- /content -->
-
-        <div data-role="footer">
-            <h4>Shivam IT CS</h4>
-        </div><!-- /footer -->
-    </div>
-    <!-- /page popup -->
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-</body>
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <meta name="description" content="A Tizen Web UI FW navigation-view template generated by Tizen Web IDE" /> 
+  <title>SHIVAM ITCS</title> 
+  <!--NOTE:
+        jquery.js and web-ui-fw.js must be included.
+        DO NOT REMOVE below code!
+    --> 
+ <script src="tizen-web-ui-fw/latest/js/jquery.js"></script> 
+  <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-theme="tizen-white"></script>
+  <!--NOTE:
+        Additional scripts and css files are to be placed here.
+        You can use jQuery namespace($) and all functionalities in jQuery
+        in your script.  For example:
+
+            <script src="main.js"></script>
+            <link rel="stylesheet" href="my.css">
+    --> 
+  <script type="text/javascript" src="./js/main.js"></script> 
+     <link rel="stylesheet" type="text/css" href="./css/jquery.css" /> 
+     <link rel="stylesheet" type="text/css" href="./css/jqm-demos.css" /> 
+  <link rel="stylesheet" type="text/css" href="./css/style.css" /> 
+  <script type="text/javascript" src="./js/jquery-1.3.2.js"></script> 
+  <script type="text/javascript" src="./js/jquery.barcode.0.3.js"></script> 
+  <script type="text/javascript" src="./js/qrcode.js"></script> 
+  <script type="text/javascript" src="./js/sample.js"></script> 
+  <script type="text/javascript" src="./js/bcmath-min.js"></script> 
+  <script type="text/javascript" src="./js/pdf417-min.js"></script> 
+  <script type="text/javascript" src="./js/llqrcode.js"></script> 
+  <script type="text/javascript" src="./js/webqr.js"></script> 
+  <script type="text/javascript">
+	$(document).ready(function() {
+		generateC39 = function() {
+			$('.barcode39').barcode({
+				code : 'code39'
+			});
+		};
+		generateI25 = function() {
+			$('.barcodeI25').barcode({
+				code : 'I25'
+			});
+		};
+
+	});
+</script> 
+  <script type="text/javascript">
+	function generate_pdf() {
+		var msg = document.getElementById('msg').value;
+		$('#barcode').empty();
+		PDF417.init(msg);
+		var barcode = PDF417.getBarcodeArray();
+		var bw = 1;
+		var bh = 1;
+		var canvas = document.createElement('canvas');
+		canvas.width = bw * barcode['num_cols'];
+		canvas.height = bh * barcode['num_rows'];
+		document.getElementById('barcode').appendChild(canvas);
+		var ctx = canvas.getContext('2d');
+		var y = 0;
+		for ( var r = 0; r < barcode['num_rows']; ++r) {
+			var x = 0;
+			for ( var c = 0; c < barcode['num_cols']; ++c) {
+				if (barcode['bcode'][r][c] == 1) {
+					ctx.fillRect(x, y, bw, bh);
+				}
+				x += bw;
+			}
+			y += bh;
+		}
+	}
+</script> 
+ </head> 
+ <body> 
+  <div data-role="page" id="barcodeGenerator"> 
+   <div data-role="header" data-position="fixed"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">1D Barcode</a></li> 
+      <li><a href="#qrGenerator">QR Code</a></li> 
+      <li><a href="#pdfGenerator">PDF417 Code</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /header --> 
+   <div data-role="content"> 
+    <h4>CODE 39:</h4> 
+    <input type="text" id="code_39" size="16" /> 
+    <a data-inline="true" data-role="button" onclick="generateC39();" style="float: right; top: -47px;">Generate Barcode</a> 
+    <br /> 
+    <div class="barcode39" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"> 
+    </div> 
+    <br /> 
+    <br /> 
+    <br /> 
+    <h4>CODE 2 of 5 Interleaved:</h4> 
+    <input type="text" id="code_i25" size="16" /> 
+    <a data-inline="true" data-role="button" onclick="generateI25();" style="float: right; top: -47px;">Generate Barcode</a>
+    <br /> 
+    <div class="barcodeI25" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"></div> 
+   </div> 
+   <!-- /content --> 
+   <div data-role="footer"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">Generator</a></li> 
+      <li><a href="#barcodeScanner">Scanner</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /footer --> 
+  </div> 
+  <!-- /page1 --> 
+  <div data-role="page" id="barcodeScanner"> 
+   <div data-role="header" data-position="fixed"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">1D Barcode</a></li> 
+      <li><a href="#qrGenerator">QR Code</a></li> 
+      <li><a href="#pdfGenerator">PDF417 Code</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /header --> 
+   <div data-role="content"> 
+    <br /> 
+    <center> 
+     <img src="barcode1.jpg" id="Image" /> 
+     <br /> 
+     <a data-role="button" data-inline="true" id="Decode" onclick="decodeBarcode();">Decode</a> 
+     <br /> 
+     <div id="Result"></div> 
+    </center> 
+   </div> 
+   <!-- /content --> 
+   <div data-role="footer"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">Generator</a></li> 
+      <li><a href="#barcodeScanner">Scanner</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /footer --> 
+  </div> 
+  <!-- /page2 --> 
+  <div data-role="page" id="qrGenerator"> 
+   <div data-role="header" data-position="fixed"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">1D Barcode</a></li> 
+      <li><a href="#qrGenerator">QR Code</a></li> 
+      <li><a href="#pdfGenerator">PDF417 Code</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /header --> 
+   <div data-role="content"> 
+    <br /> 
+    <center> 
+     <form> 
+      <textarea name="msg" rows="10" cols="40">Hello World!</textarea> 
+      <br /> 
+      <a data-role="button" data-inline="true" onclick="update_qrcode()">Generate Qr</a> 
+      <br /> 
+      <div id="qr"></div> 
+     </form> 
+    </center> 
+   </div> 
+   <!-- /content --> 
+   <div data-role="footer"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#qrGenerator" "="">Generator</a></li> 
+      <li><a href="#qrScanner" onclick="load();">Scanner</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /footer --> 
+  </div> 
+  <!-- /page3 --> 
+  <div data-role="page" id="qrScanner"> 
+   <div data-role="header" data-position="fixed"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">1D Barcode</a></li> 
+      <li><a href="#qrGenerator">QR Code</a></li> 
+      <li><a href="#pdfGenerator">PDF417 Code</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /header --> 
+   <div data-role="content"> 
+    <center> 
+     <div id="mainbody"> 
+      <br /> 
+      <div id="outdiv"> 
+       <img src="qrcode.png" id="qrimage" /> 
+      </div> 
+      <br /> 
+      <a data-role="button" data-inline="true" id="qrimg" onclick="setimg()">Decode</a> 
+      <br /> 
+     </div> 
+     <div id="result"></div> 
+     <canvas id="qr-canvas" width="400" height="300"></canvas> 
+    </center> 
+   </div> 
+   <!-- /content --> 
+   <div data-role="footer"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#qrGenerator">Generator</a></li> 
+      <li><a href="#qrScanner" onclick="load();">Scanner</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /footer --> 
+  </div> 
+  <!-- /page4 --> 
+  <div data-role="page" id="pdfGenerator"> 
+   <div data-role="header" data-position="fixed"> 
+    <div data-role="tabbar"> 
+     <ul> 
+      <li><a href="#barcodeGenerator">1D Barcode</a></li> 
+      <li><a href="#qrGenerator">QR Code</a></li> 
+      <li><a href="#pdfGenerator">PDF417 Code</a></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <!-- /header --> 
+   <div data-role="content"> 
+    <br /> 
+    <textarea id="msg" rows="10" cols="40">Hello World!</textarea> 
+    <br /> 
+    <center> 
+     <a onclick="generate_pdf();" data-role="button" data-inline="true">Generate PDF-417 Barcode</a> 
+    </center> 
+    <br /> 
+    <br /> 
+    <center> 
+     <div id="barcode"></div> 
+    </center> 
+   </div> 
+   <!-- /content --> 
+   <div data-role="footer" data-position="fixed"> 
+    <h4>Footer content</h4> 
+   </div> 
+   <!-- /footer --> 
+  </div> 
+  <!-- /page5 -->   
+ </body>
 </html>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        generateC39 = function () {
-            $('.barcode39').barcode({
-                code: 'code39'
-            });
-        };
-        generateI25 = function () {
-            $('.barcodeI25').barcode({
-                code: 'I25'
-            });
-        };
-    });
-</script>
