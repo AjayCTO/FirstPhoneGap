@@ -1,67 +1,216 @@
-<!DOCTYPE html>
-
-<!-- define angular app -->
-<html ng-app="app">
-
+﻿<!DOCTYPE html>
+<html class="ui-mobile">
 <head>
-    <!-- SCROLLS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-     
-     
-    <!-- SPELLS -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-   <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js'></script>   
-     
-    <script src="Index.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- base href="http://demos.jquerymobile.com/1.4.4/pages-multi-page/#one" -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo-page</title>
+    <link rel="stylesheet" href="content/jquery.css">
+    <link rel="stylesheet" href="content/jqm-demos.css">
+    <!--<link rel="shortcut icon" href="http://demos.jquerymobile.com/1.4.4/favicon.ico">-->
+    <script src="content/jquery_002.js"></script>
+    <!--<script src="content/index.js"></script>-->
+    <script src="content/jquery.js"></script>
+
+    <script type="text/javascript" src="https://jqueryjs.googlecode.com/files/jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="https://jquery-barcode.googlecode.com/svn/trunk/jquery-barcode/demo/jquery.barcode.0.3.js"></script>
+    
+    <script type="text/javascript" src="https://raw.github.com/EddieLa/BarcodeReader/master/src/DecoderWorker.js"></script>
+
+
 </head>
 
-<!-- define angular controller -->
-<body>
+<body class="ui-mobile-viewport ui-overlay-a">
 
-    <div ng-app='app' class="container">
-        <div  ng-controller="PageController">
-            <div class="page-header">
-                <h2>{{ title }} :  <span ng-show="isAdmin">Admin</span> <span ng-show="isCustomer">Customer</span></h2>
-            </div>          
-             <userinfo ></userinfo>
+    <!-- Start of first page: #one -->
+    <div style="min-height: 821px;" class="ui-page ui-page-theme-a ui-page-active" tabindex="0" data-url="one" data-role="page" id="one">
+
+        <div class="ui-header ui-bar-inherit" role="banner" data-role="header">
+            <h1 aria-level="1" role="heading" class="ui-title">Barcode Generator</h1>
+        </div><!-- /header -->
+
+        <form role="main" class="ui-content">
+            <h2>Barcode Generator</h2>
+
+            <!--<p>I have an <code>id</code> of "one" on my page container. I'm first in the source order so I'm shown when the page loads.</p>
+
+            <p>
+                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
+                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
+            </p>
+            <p>
+                some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text
+                some text some text some text some text some text some text some text some text some text some text
+            </p>
+            <p>You link to internal pages by referring to the <code>id</code> of the page you want to show. For example, to <a class="ui-link" href="#two">link</a> to the page with an <code>id</code> of "two", my link would have a <code>href="#two"</code> in the code.</p>-->
+
+
+            <!--<div data-role="content">
+                <h4>CODE 39:</h4>
+                <input type="text" id="code_39" size="16" />
+                <a data-inline="true" data-role="button" onclick="generateC39();" style="float: right; top: -47px;">Generate Barcode</a> </br>
+                <div class="barcode39" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"></div>
+                </br> </br> </br>
+                <h4>CODE 2 of 5 Interleaved:</h4>
+                <input type="text" id="code_i25" size="16" />
+                <a data-inline="true" data-role="button" onclick="generateI25();" style="float: right; top: -47px;">Generate Barcode</a></br>
+                <div class="barcodeI25" style="width: 340px; height: 50px; border: 1px solid red; position: absolute;"></div>
+            </div>-->
+
+
+
+            <form>
+                <h4>CODE 39:</h4>
+                <input name="text-basic" id="code_39" value="" type="text">
+                <input value="Generate Barcode" type="button" onclick="generateC39();">
+                <div class="barcode39" style="width: 100%; height: 120px; border: 1px solid red;"></div>
+                </br> </br> </br>
+                <h4>CODE 2 of 5 Interleaved:</h4>
+                <input name="text-basic" id="code_i25" value="" type="text">
+                <input value="Generate Barcode" type="button" onclick="generateI25();">
+                <div class="barcodeI25" style="width: 100%; height: 120px; border: 1px solid red;"></div>
+            </form>
+
+
+
+
+
+
+
+            <br /><br />
+
+
+            <!--<h3>Show internal pages:</h3>-->
+            <!--<p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Barcode Scanner</a></p>-->
+            <!--<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>-->
+        </div><!-- /content -->
+
+
+
+
+        <!--<div class="ui-footer ui-bar-a" role="contentinfo" data-role="footer" data-theme="a">
+            <h4 aria-level="1" role="heading" class="ui-title">Barcode Generator and Scanner</h4>
+        </div>-->
+
+    <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
+
+        <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
+            <ul class="ui-grid-a">
+                <li class="ui-block-a">
+
+                    <a href="#one" rel="external" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="a" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-a" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Barcode Generator</span></span></a>
+
+
+                </li>
+                <li class="ui-block-b" data-theme="c">
+                    <a href="#two" data-theme="c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-c" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Barcode Scanner</span></span></a>
+
+                </li>
+            </ul>
         </div>
-        <br />
-        
+
+
     </div>
-    <footer class="text-center">
-        Footer
-    </footer>
 
+
+
+    <!-- /footer -->
+    </div><!-- /page one -->
+
+
+    <!-- Start of second page: #two -->
+    <div style="min-height: 821px;" class="ui-page ui-page-theme-a" tabindex="0" data-url="two" data-role="page" id="two" data-theme="a">
+
+        <div class="ui-header ui-bar-inherit" role="banner" data-role="header">
+            <h1 aria-level="1" role="heading" class="ui-title">Barcode Scanner</h1>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+            <h2>Barcode Scanner</h2>
+            <!--<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
+            <p>
+                Notice that the theme is different for this page because we've added a few <code>data-theme</code>
+                swatch assigments here to show off how flexible it is. You can add any
+                content or widget to these pages, but we're keeping these simple.
+            </p>-->
+            <img src="12345.bmp" id="Image" />
+            </br>
+            <a data-role="button" data-inline="true" id="Decode">Decode</a>
+            </br>
+            <div id="Result"></div>
+
+            <p><a href="#one" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "Barcode Generator"</a></p>
+
+        </div><!-- /content -->
+
+        <!--<div class="ui-footer ui-bar-inherit" role="contentinfo" data-role="footer">
+            <h4 aria-level="1" role="heading" class="ui-title">Shivam IT CS</h4>
+        </div>-->
+        <!-- /footer -->
+    </div>
+    <!-- /page two -->
+
+
+
+    <!-- Start of third page: #popup -->
+    <div data-url="popup" data-role="page" id="popup">
+
+        <div data-role="header" data-theme="b">
+            <h1>Dialog</h1>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+            <h2>Popup</h2>
+            <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
+            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Back to page "one"</a></p>
+        </div><!-- /content -->
+
+        <div data-role="footer">
+            <h4>Shivam IT CS</h4>
+        </div><!-- /footer -->
+    </div>
+    <!-- /page popup -->
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 </body>
-
 </html>
-<style>
-    body {
-        font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-        color: #666666;
-    }
 
-    .content {
-        width: 740px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: rgba(100,100,100,.1);
-        border: 1px solid rgba(0,0,0,.1);
-        border-radius: 3px;
-    }
-
-    header {
-        text-align: center;
-    }
-
-    .user {
-        font-size: 0.9em;
-        padding: 10px;
-        margin: 20px 0;
-        background-color: rgba(255, 255, 255,.8);
-        border: 1px solid white;
-        border-radius: 3px;
-        color: grey;
-    }
-</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        generateC39 = function () {
+            $('.barcode39').barcode({
+                code: 'code39'
+            });
+        };
+        generateI25 = function () {
+            $('.barcodeI25').barcode({
+                code: 'I25'
+            });
+        };
+    });
+</script>
