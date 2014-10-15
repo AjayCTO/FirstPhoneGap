@@ -5,8 +5,12 @@
     <meta name="description" content="barcode generator and scanner" />
     <title>SHIVAM ITCS</title>
 
+    <link rel="shortcut icon" href="favicon.ico">
+
     <link rel="stylesheet" href="css/jquery.css">
     <link rel="stylesheet" href="css/jqm-demos.css">
+
+
     <script src="js/jquery_002.js"></script>
     <script src="js/jquery.js"></script>
 
@@ -38,37 +42,247 @@
     </script>
 
     <script type="text/javascript">
-	function generate_pdf() {
-		var msg = document.getElementById('msg').value;
-		$('#barcode').empty();
-		PDF417.init(msg);
-		var barcode = PDF417.getBarcodeArray();
-		var bw = 1;
-		var bh = 1;
-		var canvas = document.createElement('canvas');
-		canvas.width = bw * barcode['num_cols'];
-		canvas.height = bh * barcode['num_rows'];
-		document.getElementById('barcode').appendChild(canvas);
-		var ctx = canvas.getContext('2d');
-		var y = 0;
-		for ( var r = 0; r < barcode['num_rows']; ++r) {
-			var x = 0;
-			for ( var c = 0; c < barcode['num_cols']; ++c) {
-				if (barcode['bcode'][r][c] == 1) {
-					ctx.fillRect(x, y, bw, bh);
-				}
-				x += bw;
-			}
-			y += bh;
-		}
-	}
+        function generate_pdf() {
+            var msg = document.getElementById('msg').value;
+            $('#barcode').empty();
+            PDF417.init(msg);
+            var barcode = PDF417.getBarcodeArray();
+            var bw = 1;
+            var bh = 1;
+            var canvas = document.createElement('canvas');
+            canvas.width = bw * barcode['num_cols'];
+            canvas.height = bh * barcode['num_rows'];
+            document.getElementById('barcode').appendChild(canvas);
+            var ctx = canvas.getContext('2d');
+            var y = 0;
+            for (var r = 0; r < barcode['num_rows']; ++r) {
+                var x = 0;
+                for (var c = 0; c < barcode['num_cols']; ++c) {
+                    if (barcode['bcode'][r][c] == 1) {
+                        ctx.fillRect(x, y, bw, bh);
+                    }
+                    x += bw;
+                }
+                y += bh;
+            }
+        }
     </script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#asd").change(function () {
+                readImage(this);
+            });
+        })
+
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                var FR = new FileReader();
+                FR.onload = function (e) {
+                    $('#qrimage').attr("src", e.target.result);
+                    //$('#base').text(e.target.result);
+                };
+                FR.readAsDataURL(input.files[0]);
+                document.getElementById("result").innerHTML = "";
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        /** * Take picture with camera */
+        function takePicture() {
+
+            navigator.camera.getPicture(function (uri) {
+                var img = document.getElementById('camera_image');
+                img.style.visibility = "visible";
+                img.style.display = "block";
+                img.src = uri;
+                document.getElementById('camera_status').innerHTML = "Success";
+            },
+            function (e) {
+                console.log("Error getting picture: " + e);
+                document.getElementById('camera_status').innerHTML = "Error getting picture.";
+            }, { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI });
+        };
+
+
+
+        /** * Select picture from library */
+        function selectPicture() {
+            navigator.camera.getPicture({ quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
+        };
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+
+        var pictureSource;   // picture source
+        var destinationType; // sets the format of returned value
+
+        // Wait for PhoneGap to connect with the device
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // PhoneGap is ready to be used!
+        //
+        function onDeviceReady() {
+
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
+        }
+
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoDataSuccess(imageData) {
+            // Uncomment to view the base64 encoded image data
+            // console.log(imageData);
+
+            // Get image handle
+            //
+            var smallImage = document.getElementById('smallImage');
+
+            // Unhide image elements
+            //
+            smallImage.style.display = 'block';
+
+            // Show the captured photo
+            // The inline CSS rules are used to resize the image
+            //
+            smallImage.src = "data:image/jpeg;base64," + imageData;
+        }
+
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoURISuccess(imageURI) {
+
+            var largeImage = document.getElementById('largeImage');
+            largeImage.style.display = 'block';
+            largeImage.src = imageURI;
+
+
+            var qrimage = document.getElementById('qrimage');
+            qrimage.style.display = 'block';
+            qrimage.src = imageURI;
+
+
+
+
+
+        }
+
+        // A button will call this function
+        //
+        function capturePhoto() {
+            // Take picture using device camera and retrieve image as base64-encoded string
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+        }
+
+        // A button will call this function
+        //
+        function capturePhotoEdit() {
+            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
+        }
+
+        // A button will call this function
+        //
+        function getPhoto(source) {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+                quality: 50,
+                destinationType: destinationType.FILE_URI,
+                sourceType: source
+            });
+        }
+
+        // Called if something bad happens.
+        //
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        //function saveImageToPhone(url, success, error) {
+        //    var canvas, context, imageDataUrl, imageData;
+        //    var img = new Image();
+        //    img.onload = function () {
+        //        canvas = document.createElement('canvas');
+        //        canvas.width = img.width;
+        //        canvas.height = img.height;
+        //        context = canvas.getContext('2d');
+        //        context.drawImage(img, 0, 0);
+        //        try {
+        //            imageDataUrl = canvas.toDataURL('image/jpeg', 1.0);
+        //            imageData = imageDataUrl.replace(/data:image\/jpeg;base64,/, '');
+        //            cordova.exec(
+        //                success,
+        //                error,
+        //                'Canvas2ImagePlugin',
+        //                'saveImageDataToLibrary',
+        //                [imageData]
+        //            );
+        //        }
+        //        catch (e) {
+        //            error(e.message);
+        //        }
+        //    };
+        //    try {
+        //        img.src = url;
+        //    }
+        //    catch (e) {
+        //        error(e.message);
+        //    }
+        //}
+        //var success = function (msg) {
+        //    console.info(msg);
+        //};
+        //var error = function (err) {
+        //    console.error(err);
+        //};
+
+        function saveImage() {
+            var datasrc=$("#qr img").attr("src");
+            var img = new Image();
+            img.src = datasrc;
+            var canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            context = canvas.getContext('2d');
+            context.drawImage(img, 0, 0);
+
+            window.canvas2ImagePlugin.saveImageDataToLibrary(
+        function (msg) {
+            console.log(msg);
+        },
+        function (err) {
+            console.log(err);
+        },
+        document.getElementById('canvas')
+    );
+
+        }
+
+    </script>
+
+    <script>
+        function exitApp() {
+            navigator.app.exitApp();
+        };
+    </script>
 
 </head>
 <body>
 
     <div data-role="page" id="barcodeGenerator">
+
+        <div data-role="header">
+            <img src="logo.png" />
+            <!--<h1>SHIVAM IT CS</h1>-->
+            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
+            <!--<span class="ui-title">SHIVAM IT CS</span>-->
+        </div>
 
         <div data-role="navbar" data-position="fixed">
             <ul>
@@ -80,37 +294,34 @@
         <!-- /header -->
 
         <div data-role="content">
-           
-                <h4>CODE 39:</h4>
-                <input id="code_39" value="" type="text">
-                <input value="Generate Barcode" type="button" onclick="generateC39();">
 
-                <br />
-                <div class="barcode39" style="width: 100%; height: 50px; border: 1px solid red; ">
-                </div>
-                <br />
-                <br />
-                <br />
-                <h4>CODE 2 of 5 Interleaved:</h4>
-                <input name="text-basic" id="code_i25" value="" type="text">
-                <input value="Generate Barcode" type="button" onclick="generateI25();">
-                <br />
-                <div class="barcodeI25" style="width: 100%; height: 50px; border: 1px solid red;"></div>
-           
+            <h4>CODE 39:</h4>
+            <input id="code_39" value="" type="text">
+            <input value="Generate Barcode" type="button" onclick="generateC39();">
+
+            <br />
+            <div class="barcode39" style="width: 100%; height: 50px; border: 1px solid red; ">
+
+            </div>
+            <br />
+            <br />
+            <br />
+            <h4>CODE 2 of 5 Interleaved:</h4>
+            <input name="text-basic" id="code_i25" value="" type="text">
+            <input value="Generate Barcode" type="button" onclick="generateI25();">
+            <br />
+            <div class="barcodeI25" style="width: 100%; height: 50px; border: 1px solid red;"></div>
+
+
+
+
+
+
         </div>
         <!-- /content -->
 
         <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
             <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-                <!--<ul class="ui-grid-a">
-                    <li class="ui-block-a">
-                        <a href="#barcodeGenerator" rel="external" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="a" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-a" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Generator</span></span></a>
-                    </li>
-                    <li class="ui-block-b" data-theme="c">
-                        <a href="#barcodeScanner" data-theme="c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-inline="true" class="ui-btn ui-btn-inline ui-btn-up-c" target="_self"><span class="ui-btn-inner"><span class="ui-btn-text">Scanner</span></span></a>
-
-                    </li>
-                </ul>-->
                 <ul>
                     <li><a href="#barcodeGenerator" class="ui-btn-active ui-state-persist">Generator</a></li>
                     <li><a href="#barcodeScanner">Scanner</a></li>
@@ -125,7 +336,12 @@
 
     <!-- /page1 -->
     <div data-role="page" id="barcodeScanner">
-
+        <div data-role="header">
+            <img src="logo.png" />
+            <!--<h1>SHIVAM IT CS</h1>-->
+            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
+            <!--<span class="ui-title">SHIVAM IT CS</span>-->
+        </div>
 
         <div data-role="navbar" data-position="fixed">
             <ul>
@@ -139,7 +355,8 @@
         <div data-role="content">
             <br />
             <center>
-                <img src="barcode1.jpg" id="Image" />
+                <img src="images/barcode1.jpg" id="Image" />
+                <!--<img src="images/123456.bmp" style="height:100%;width:100%" id="Image" />-->
                 <br />
                 <a data-role="button" data-inline="true" id="Decode" onclick="decodeBarcode();">Decode</a>
                 <br />
@@ -164,6 +381,12 @@
     <!-- /page2 -->
     <div data-role="page" id="qrGenerator">
 
+        <div data-role="header">
+            <img src="logo.png" />
+            <!--<h1>SHIVAM IT CS</h1>-->
+            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
+            <!--<span class="ui-title">SHIVAM IT CS</span>-->
+        </div>
         <div data-role="navbar" data-position="fixed">
             <ul>
                 <li><a href="#barcodeGenerator">1D Barcode</a></li>
@@ -182,6 +405,8 @@
                     <a data-role="button" data-inline="true" onclick="update_qrcode()">Generate Qr</a>
                     <br />
                     <div id="qr"></div>
+                    <br />
+                    <a data-role="button" data-inline="true" onclick="saveImage()">Save Image</a>
                 </form>
             </center>
         </div>
@@ -202,10 +427,15 @@
         <!-- /footer -->
     </div>
 
-
     <!-- /page3 -->
     <div data-role="page" id="qrScanner">
 
+        <div data-role="header">
+            <img src="logo.png" />
+            <!--<h1>SHIVAM IT CS</h1>-->
+            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
+            <!--<span class="ui-title">SHIVAM IT CS</span>-->
+        </div>
         <div data-role="navbar" data-position="fixed">
             <ul>
                 <li><a href="#barcodeGenerator">1D Barcode</a></li>
@@ -213,14 +443,20 @@
                 <li><a href="#pdfGenerator">PDF417 Code</a></li>
             </ul>
         </div>
-
         <!-- /header -->
+
         <div data-role="content">
             <center>
                 <div id="mainbody">
                     <br />
                     <div id="outdiv">
-                        <img src="qrcode.png" id="qrimage" />
+
+                        <input type='file' id="asd" />
+
+                        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button>
+
+                        <img src="images/qrcode.png" id="qrimage" />
+
                     </div>
                     <br />
                     <a data-role="button" data-inline="true" id="qrimg" onclick="setimg()">Decode</a>
@@ -245,10 +481,15 @@
         <!-- /footer -->
     </div>
 
-
     <!-- /page4 -->
     <div data-role="page" id="pdfGenerator">
 
+        <div data-role="header">
+            <img src="logo.png" />
+            <!--<h1>SHIVAM IT CS</h1>-->
+            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
+            <!--<span class="ui-title">SHIVAM IT CS</span>-->
+        </div>
 
         <div data-role="navbar" data-position="fixed">
             <ul>
@@ -277,6 +518,9 @@
         </div>
         <!-- /footer -->
     </div>
+
+
     <!-- /page5 -->
+
 </body>
 </html>

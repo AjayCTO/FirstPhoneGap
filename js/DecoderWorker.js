@@ -527,7 +527,8 @@ function averageLines(){
 	return result;
 };
 
-function Main(){
+function Main() {
+   
 	var tableSelection=ImgProcessing();
 	var allResults=[]
 	for(var z=0;z<tableSelection.length;z++){
@@ -546,7 +547,8 @@ function Main(){
 		var first = true;
 		var eanStatistics = {};
 		var eanOrder = [];
-		do{
+		do {
+           
 			variationData = yStraighten(scaled.subarray(incrmt,incrmt+Image.width*4))
 			Selection=BinaryString(variationData,0);
 			if(Selection) format = "Code128";

@@ -57,11 +57,12 @@ function load()
 
 function setimg()
 {
-	document.getElementById("result").innerHTML="";
+    
+    
 	if(stype==2)
 		return;
 	var qrfile = document.getElementById('qrimage').src;
 	gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 	qrcode.decode(qrfile);
-	stype=2;
+	//stype=2;
 }

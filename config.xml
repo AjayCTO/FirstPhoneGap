@@ -19,4 +19,8 @@
 
     <preference name="phonegap-version" value="2.7.0" />
 
+      <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+      </feature>
+
 </widget>

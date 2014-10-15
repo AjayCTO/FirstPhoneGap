@@ -11,7 +11,8 @@ var init = function () {
 };
 $(document).bind('pageinit', init);
 
-function decodeBarcode(){
+function decodeBarcode() {
+    debugger;
 	var c = document.createElement("canvas");
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("Image");
@@ -20,6 +21,7 @@ function decodeBarcode(){
 	var workerCount = 0;
 	var ResultOfDecoding = document.getElementById("Result");
 	function receiveMessage(e) {
+	    debugger;
 		if (e.data.success === "log") {
 			console.log(e.data.result);
 			return;
@@ -51,6 +53,8 @@ function decodeBarcode(){
 			}
 		}
 	}
+
+	debugger;
 	var DecodeWorker = new Worker("./js/DecoderWorker.js");
 	DecodeWorker.onmessage = receiveMessage;
 	var FlipWorker = new Worker("./js/DecoderWorker.js");
