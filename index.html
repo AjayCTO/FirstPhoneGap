@@ -88,7 +88,7 @@
         }
     </script>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         /** * Take picture with camera */
         function takePicture() {
 
@@ -112,9 +112,8 @@
             navigator.camera.getPicture({ quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
         };
 
-    </script>
-
-    <script type="text/javascript" charset="utf-8">
+    </script>-->
+    <!--<script type="text/javascript" charset="utf-8">
 
         var pictureSource;   // picture source
         var destinationType; // sets the format of returned value
@@ -201,46 +200,8 @@
             alert('Failed because: ' + message);
         }
 
-    </script>
-
-    <script type="text/javascript" charset="utf-8">
-        //function saveImageToPhone(url, success, error) {
-        //    var canvas, context, imageDataUrl, imageData;
-        //    var img = new Image();
-        //    img.onload = function () {
-        //        canvas = document.createElement('canvas');
-        //        canvas.width = img.width;
-        //        canvas.height = img.height;
-        //        context = canvas.getContext('2d');
-        //        context.drawImage(img, 0, 0);
-        //        try {
-        //            imageDataUrl = canvas.toDataURL('image/jpeg', 1.0);
-        //            imageData = imageDataUrl.replace(/data:image\/jpeg;base64,/, '');
-        //            cordova.exec(
-        //                success,
-        //                error,
-        //                'Canvas2ImagePlugin',
-        //                'saveImageDataToLibrary',
-        //                [imageData]
-        //            );
-        //        }
-        //        catch (e) {
-        //            error(e.message);
-        //        }
-        //    };
-        //    try {
-        //        img.src = url;
-        //    }
-        //    catch (e) {
-        //        error(e.message);
-        //    }
-        //}
-        //var success = function (msg) {
-        //    console.info(msg);
-        //};
-        //var error = function (err) {
-        //    console.error(err);
-        //};
+    </script>-->
+    <!--<script type="text/javascript" charset="utf-8">
 
         function saveImage() {
             var datasrc=$("#qr img").attr("src");
@@ -264,13 +225,61 @@
 
         }
 
-    </script>
+    </script>-->
 
     <script>
         function exitApp() {
             navigator.app.exitApp();
         };
     </script>
+
+    <script>
+        function decodeQR() {
+            $("#loadingQR").show();
+            var cnt = 1;
+            var myVar = setInterval(function ()
+            {
+                cnt = cnt + 1;
+                if (cnt == 3) {
+                    setimg();
+                    clearInterval(myVar);
+                    $("#loadingQR").hide();
+                }
+                
+            },
+            1000);
+            
+        }
+
+
+    </script>
+
+    <style>
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+            float: left;
+            margin-right: 4px;
+        }
+
+            .fileinput-button input {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                transform: translate(-300px, 0) scale(4);
+                font-size: 23px;
+                direction: ltr;
+                cursor: pointer;
+            }
+
+       
+
+    </style>
+
+    
 
 </head>
 <body>
@@ -406,7 +415,7 @@
                     <br />
                     <div id="qr"></div>
                     <br />
-                    <a data-role="button" data-inline="true" onclick="saveImage()">Save Image</a>
+                    <!--<a data-role="button" data-inline="true" onclick="saveImage()">Save Image</a>-->
                 </form>
             </center>
         </div>
@@ -449,20 +458,35 @@
             <center>
                 <div id="mainbody">
                     <br />
-                    <div id="outdiv">
 
-                        <input type='file' id="asd" />
+                    <div id="outdiv" class="ui-grid-solo">
 
-                        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button>
-
-                        <img src="images/qrcode.png" id="qrimage" />
+                        <!--<input type='file' id="asd" />-->
+                        <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button>-->
+                        <span class="ui-btn ui-corner-all fileinput-button ">
+                            <span>Upload Image</span>
+                            <input type='file' id="asd" />
+                        </span>
 
                     </div>
                     <br />
-                    <a data-role="button" data-inline="true" id="qrimg" onclick="setimg()">Decode</a>
+
+                    <div class="ui-grid-solo">
+                        <img src="images/qrcode.png" id="qrimage" />
+                    </div>
+                    <br />
+
+                    <div class="ui-grid-solo">
+                        <a data-role="button" data-inline="true" id="qrimg" onclick="decodeQR()">Decode</a>
+                    </div>
+                   
+                    <div class="ui-grid-solo">
+                        <img id="loadingQR" src="loading.gif" style="display:none" />
+                    </div>
+                    
                     <br />
                 </div>
-                <div id="result"></div>
+                <div id="result" style="color: rgba(135, 54, 54, 1);"></div>
                 <canvas id="qr-canvas" width="400" height="300"></canvas>
             </center>
         </div>
