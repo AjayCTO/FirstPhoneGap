@@ -1,550 +1,129 @@
-﻿<!DOCTYPE html>
+﻿
+
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="description" content="barcode generator and scanner" />
-    <title>SHIVAM ITCS</title>
-
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <link rel="stylesheet" href="css/jquery.css">
-    <link rel="stylesheet" href="css/jqm-demos.css">
-
-
-    <script src="js/jquery_002.js"></script>
-    <script src="js/jquery.js"></script>
-
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/jquery-1.3.2.js"></script>
-    <script type="text/javascript" src="./js/jquery.barcode.0.3.js"></script>
-    <script type="text/javascript" src="./js/qrcode.js"></script>
-    <script type="text/javascript" src="./js/sample.js"></script>
-    <script type="text/javascript" src="./js/bcmath-min.js"></script>
-    <script type="text/javascript" src="./js/pdf417-min.js"></script>
-    <script type="text/javascript" src="./js/llqrcode.js"></script>
-    <script type="text/javascript" src="./js/webqr.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            generateC39 = function () {
-                $('.barcode39').barcode({
-                    code: 'code39'
-                });
-            };
-            generateI25 = function () {
-                $('.barcodeI25').barcode({
-                    code: 'I25'
-                });
-            };
-
-        });
-    </script>
-
-    <script type="text/javascript">
-        function generate_pdf() {
-            var msg = document.getElementById('msg').value;
-            $('#barcode').empty();
-            PDF417.init(msg);
-            var barcode = PDF417.getBarcodeArray();
-            var bw = 1;
-            var bh = 1;
-            var canvas = document.createElement('canvas');
-            canvas.width = bw * barcode['num_cols'];
-            canvas.height = bh * barcode['num_rows'];
-            document.getElementById('barcode').appendChild(canvas);
-            var ctx = canvas.getContext('2d');
-            var y = 0;
-            for (var r = 0; r < barcode['num_rows']; ++r) {
-                var x = 0;
-                for (var c = 0; c < barcode['num_cols']; ++c) {
-                    if (barcode['bcode'][r][c] == 1) {
-                        ctx.fillRect(x, y, bw, bh);
-                    }
-                    x += bw;
-                }
-                y += bh;
-            }
-        }
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#asd").change(function () {
-                readImage(this);
-            });
-        })
-
-        function readImage(input) {
-            if (input.files && input.files[0]) {
-                var FR = new FileReader();
-                FR.onload = function (e) {
-                    $('#qrimage').attr("src", e.target.result);
-                    //$('#base').text(e.target.result);
-                };
-                FR.readAsDataURL(input.files[0]);
-                document.getElementById("result").innerHTML = "";
-            }
-        }
-    </script>
-
-    <!--<script type="text/javascript">
-        /** * Take picture with camera */
-        function takePicture() {
-
-            navigator.camera.getPicture(function (uri) {
-                var img = document.getElementById('camera_image');
-                img.style.visibility = "visible";
-                img.style.display = "block";
-                img.src = uri;
-                document.getElementById('camera_status').innerHTML = "Success";
-            },
-            function (e) {
-                console.log("Error getting picture: " + e);
-                document.getElementById('camera_status').innerHTML = "Error getting picture.";
-            }, { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI });
-        };
-
-
-
-        /** * Select picture from library */
-        function selectPicture() {
-            navigator.camera.getPicture({ quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
-        };
-
-    </script>-->
-    <!--<script type="text/javascript" charset="utf-8">
-
-        var pictureSource;   // picture source
-        var destinationType; // sets the format of returned value
-
-        // Wait for PhoneGap to connect with the device
-        //
-        document.addEventListener("deviceready", onDeviceReady, false);
-
-        // PhoneGap is ready to be used!
-        //
-        function onDeviceReady() {
-
-            pictureSource = navigator.camera.PictureSourceType;
-            destinationType = navigator.camera.DestinationType;
-        }
-
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoDataSuccess(imageData) {
-            // Uncomment to view the base64 encoded image data
-            // console.log(imageData);
-
-            // Get image handle
-            //
-            var smallImage = document.getElementById('smallImage');
-
-            // Unhide image elements
-            //
-            smallImage.style.display = 'block';
-
-            // Show the captured photo
-            // The inline CSS rules are used to resize the image
-            //
-            smallImage.src = "data:image/jpeg;base64," + imageData;
-        }
-
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoURISuccess(imageURI) {
-
-            var largeImage = document.getElementById('largeImage');
-            largeImage.style.display = 'block';
-            largeImage.src = imageURI;
-
-
-            var qrimage = document.getElementById('qrimage');
-            qrimage.style.display = 'block';
-            qrimage.src = imageURI;
-
-
-
-
-
-        }
-
-        // A button will call this function
-        //
-        function capturePhoto() {
-            // Take picture using device camera and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-        }
-
-        // A button will call this function
-        //
-        function capturePhotoEdit() {
-            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
-        }
-
-        // A button will call this function
-        //
-        function getPhoto(source) {
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-                quality: 50,
-                destinationType: destinationType.FILE_URI,
-                sourceType: source
-            });
-        }
-
-        // Called if something bad happens.
-        //
-        function onFail(message) {
-            alert('Failed because: ' + message);
-        }
-
-    </script>-->
-    <!--<script type="text/javascript" charset="utf-8">
-
-        function saveImage() {
-            var datasrc=$("#qr img").attr("src");
-            var img = new Image();
-            img.src = datasrc;
-            var canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0);
-
-            window.canvas2ImagePlugin.saveImageDataToLibrary(
-        function (msg) {
-            console.log(msg);
-        },
-        function (err) {
-            console.log(err);
-        },
-        document.getElementById('canvas')
-    );
-
-        }
-
-    </script>-->
-
-    <script>
-        function exitApp() {
-            navigator.app.exitApp();
-        };
-    </script>
-
-    <script>
-        function decodeQR() {
-            $("#loadingQR").show();
-            var cnt = 1;
-            var myVar = setInterval(function ()
-            {
-                cnt = cnt + 1;
-                if (cnt == 3) {
-                    setimg();
-                    clearInterval(myVar);
-                    $("#loadingQR").hide();
-                }
-                
-            },
-            1000);
-            
-        }
-
-
-    </script>
+    <title>Login or Register</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link href="appcss/index.css" rel="stylesheet" id="bootstrap-css">
+    <link href="kendo/kendo.common.min.css" rel="stylesheet" />
+    <link href="kendo/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="kendo/kendo.silver.min.css" rel="stylesheet" />
+    <link href="kendo/kendo.silver.mobile.min.css" rel="stylesheet" />
+    <link href="kendo/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="kendo/kendo.dataviz.silver.min.css" rel="stylesheet" />
 
     <style>
-        .fileinput-button {
-            position: relative;
-            overflow: hidden;
-            float: left;
-            margin-right: 4px;
-        }
+     
 
-            .fileinput-button input {
-                position: absolute;
-                top: 0;
-                right: 0;
-                margin: 0;
-                opacity: 0;
-                filter: alpha(opacity=0);
-                transform: translate(-300px, 0) scale(4);
-                font-size: 23px;
-                direction: ltr;
-                cursor: pointer;
-            }
+        .panel-heading {
+    padding: 5px 15px;
+}
 
-       
+.panel-footer {
+	padding: 1px 15px;
+	color: #A0A0A0;
+}
 
+.profile-img {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
     </style>
 
-    
+
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 </head>
 <body>
 
-    <div data-role="page" id="barcodeGenerator">
-
-        <div data-role="header">
-            <img src="logo.png" />
-            <!--<h1>SHIVAM IT CS</h1>-->
-            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
-            <!--<span class="ui-title">SHIVAM IT CS</span>-->
-        </div>
-
-        <div data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#barcodeGenerator" class="ui-btn-active ui-state-persist">1D Barcode</a></li>
-                <li><a href="#qrGenerator">QR Code</a></li>
-                <li><a href="#pdfGenerator">PDF417 Code</a></li>
-            </ul>
-        </div>
-        <!-- /header -->
-
-        <div data-role="content">
-
-            <h4>CODE 39:</h4>
-            <input id="code_39" value="" type="text">
-            <input value="Generate Barcode" type="button" onclick="generateC39();">
-
-            <br />
-            <div class="barcode39" style="width: 100%; height: 50px; border: 1px solid red; ">
-
-            </div>
-            <br />
-            <br />
-            <br />
-            <h4>CODE 2 of 5 Interleaved:</h4>
-            <input name="text-basic" id="code_i25" value="" type="text">
-            <input value="Generate Barcode" type="button" onclick="generateI25();">
-            <br />
-            <div class="barcodeI25" style="width: 100%; height: 50px; border: 1px solid red;"></div>
-
-
-
-
-
-
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
-            <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-                <ul>
-                    <li><a href="#barcodeGenerator" class="ui-btn-active ui-state-persist">Generator</a></li>
-                    <li><a href="#barcodeScanner">Scanner</a></li>
-
-                </ul>
-
-
-            </div>
-        </div>
-        <!-- /footer -->
-    </div>
-
-    <!-- /page1 -->
-    <div data-role="page" id="barcodeScanner">
-        <div data-role="header">
-            <img src="logo.png" />
-            <!--<h1>SHIVAM IT CS</h1>-->
-            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
-            <!--<span class="ui-title">SHIVAM IT CS</span>-->
-        </div>
-
-        <div data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#barcodeGenerator" class="ui-btn-active ui-state-persist">1D Barcode</a></li>
-                <li><a href="#qrGenerator">QR Code</a></li>
-                <li><a href="#pdfGenerator">PDF417 Code</a></li>
-            </ul>
-        </div>
-        <!-- /header -->
-
-        <div data-role="content">
-            <br />
-            <center>
-                <img src="images/barcode1.jpg" id="Image" />
-                <!--<img src="images/123456.bmp" style="height:100%;width:100%" id="Image" />-->
-                <br />
-                <a data-role="button" data-inline="true" id="Decode" onclick="decodeBarcode();">Decode</a>
-                <br />
-                <div id="Result"></div>
-            </center>
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
-            <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-                <ul>
-                    <li><a href="#barcodeGenerator">Generator</a></li>
-                    <li><a href="#barcodeScanner" class="ui-btn-active ui-state-persist">Scanner</a></li>
-                </ul>
-            </div>
-
-
-        </div>
-        <!-- /footer -->
-    </div>
-
-    <!-- /page2 -->
-    <div data-role="page" id="qrGenerator">
-
-        <div data-role="header">
-            <img src="logo.png" />
-            <!--<h1>SHIVAM IT CS</h1>-->
-            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
-            <!--<span class="ui-title">SHIVAM IT CS</span>-->
-        </div>
-        <div data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#barcodeGenerator">1D Barcode</a></li>
-                <li><a href="#qrGenerator" class="ui-btn-active ui-state-persist">QR Code</a></li>
-                <li><a href="#pdfGenerator">PDF417 Code</a></li>
-            </ul>
-        </div>
-        <!-- /header -->
-
-        <div data-role="content">
-            <br />
-            <center>
-                <form>
-                    <textarea name="msg" rows="10" cols="40">Hello World!</textarea>
-                    <br />
-                    <a data-role="button" data-inline="true" onclick="update_qrcode()">Generate Qr</a>
-                    <br />
-                    <div id="qr"></div>
-                    <br />
-                    <!--<a data-role="button" data-inline="true" onclick="saveImage()">Save Image</a>-->
-                </form>
-            </center>
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
-            <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-
-                <ul>
-                    <li><a href="#qrGenerator" class="ui-btn-active ui-state-persist">Generator</a></li>
-                    <li><a href="#qrScanner" onclick="load();">Scanner</a></li>
-                </ul>
-
-            </div>
-
-
-        </div>
-        <!-- /footer -->
-    </div>
-
-    <!-- /page3 -->
-    <div data-role="page" id="qrScanner">
-
-        <div data-role="header">
-            <img src="logo.png" />
-            <!--<h1>SHIVAM IT CS</h1>-->
-            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
-            <!--<span class="ui-title">SHIVAM IT CS</span>-->
-        </div>
-        <div data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#barcodeGenerator">1D Barcode</a></li>
-                <li><a href="#qrGenerator" class="ui-btn-active ui-state-persist">QR Code</a></li>
-                <li><a href="#pdfGenerator">PDF417 Code</a></li>
-            </ul>
-        </div>
-        <!-- /header -->
-
-        <div data-role="content">
-            <center>
-                <div id="mainbody">
-                    <br />
-
-                    <div id="outdiv" class="ui-grid-solo">
-
-                        <!--<input type='file' id="asd" />-->
-                        <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button>-->
-                        <span class="ui-btn ui-corner-all fileinput-button ">
-                            <span>Upload Image</span>
-                            <input type='file' id="asd" />
-                        </span>
-
+    
+    <br />
+    <div class="container" style="margin-top:40px">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h3>Login or Register</h3>
+                <div class="panel panel-default">
+					
+                    <div class="panel-heading">
+                        <strong> Sign in to Score app</strong>
                     </div>
-                    <br />
-
-                    <div class="ui-grid-solo">
-                        <img src="images/qrcode.png" id="qrimage" />
+                    <div class="panel-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="center-block">
+                                        <img class="profile-img"
+                                             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                <input class="form-control" placeholder="Username" name="loginname" id="loginname" type="text" autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
+                                                <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button onclick="validateForm()" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                                                <i class="fa fa-unlock"></i> Sign In
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                     </div>
-                    <br />
-
-                    <div class="ui-grid-solo">
-                        <a data-role="button" data-inline="true" id="qrimg" onclick="decodeQR()">Decode</a>
+                    <div class="panel-footer ">
+                        Indys 411 Security Check
                     </div>
-                   
-                    <div class="ui-grid-solo">
-                        <img id="loadingQR" src="loading.gif" style="display:none" />
-                    </div>
-                    
-                    <br />
                 </div>
-                <div id="result" style="color: rgba(135, 54, 54, 1);"></div>
-                <canvas id="qr-canvas" width="400" height="300"></canvas>
-            </center>
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" align="center" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup">
-            <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
-
-                <ul>
-                    <li><a href="#qrGenerator">Generator</a></li>
-                    <li><a href="#qrScanner" class="ui-btn-active ui-state-persist" onclick="load();">Scanner</a></li>
-                </ul>
-
             </div>
         </div>
-        <!-- /footer -->
     </div>
+   
+    <script type="text/javascript" src="appjs/index.js"></script>
+    
 
-    <!-- /page4 -->
-    <div data-role="page" id="pdfGenerator">
+    <script src="appjs/jquery.js" type="text/javascript"></script>
+    <script src="appjs/tooltips-popovers.js"></script>
+    <script type="text/javascript" src="appjs/boot.js"></script>
+    <script src="kendo/kendo.all.min.js"></script>
+    <script src="kendo/kendo.timezones.min.js"></script>
+    <script type="text/javascript" src="appjs/jquery.cookie.js"></script>
 
-        <div data-role="header">
-            <img src="logo.png" />
-            <!--<h1>SHIVAM IT CS</h1>-->
-            <a href="#" data-icon="gear" class="ui-btn-right" onclick="exitApp();">Exit</a>
-            <!--<span class="ui-title">SHIVAM IT CS</span>-->
-        </div>
+    <script>
+        function validateForm() {
+            var email = $("#loginname").val();
+            var password=$("#password").val();
+         
+            if (email==null || email=="") {
+                alert("User name must be filled out");
+            }
 
-        <div data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#barcodeGenerator">1D Barcode</a></li>
-                <li><a href="#qrGenerator">QR Code</a></li>
-                <li><a href="#pdfGenerator" class="ui-btn-active ui-state-persist">PDF417 Code</a></li>
-            </ul>
-        </div>
-        <!-- /header -->
-        <div data-role="content">
-            <br />
-            <textarea id="msg" rows="10" cols="40">Hello World!</textarea>
-            <br />
-            <center>
-                <a onclick="generate_pdf();" data-role="button" data-inline="true">Generate PDF-417 Barcode</a>
-            </center>
-            <br />
-            <br />
-            <center>
-                <div id="barcode"></div>
-            </center>
-        </div>
-        <!-- /content -->
-        <div data-role="footer" data-position="fixed">
-            <h4>Footer content</h4>
-        </div>
-        <!-- /footer -->
-    </div>
-
-
-    <!-- /page5 -->
+            else {
+                $.cookie('email', email, { expires: 14 });
+                $.cookie('password', password, { expires: 14 });
+                window.location.href = "appindex.html";
+            }
+        }
+    </script>
+    
 
 </body>
 </html>
